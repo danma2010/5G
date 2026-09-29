@@ -1,0 +1,1035 @@
+<!-- Split 7.2x fronthaul reference: paste this whole file into ONE Custom HTML block -->
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=JetBrains+Mono:wght@400;600&display=swap");
+
+#fh-root{
+  box-sizing:border-box;
+  --paper:#EEF1F3; --panel:#FFFFFF; --ink:#15202B; --muted:#56626F; --rule:#C8D0D8; --soft:#E2E7EC;
+  --eth:#5E6F86; --ec:#B8691F; --or:#15817A; --pl:#6547B0; --rs:#9AA5B1;
+  --tim:#C0344F; --hard:#2A64AD; --soft-ip:#3C8C4A; --ps:#8A5A12;
+  --eth-t:#DCE3EC; --ec-t:#F5E3CF; --or-t:#D2ECE9; --pl-t:#E6DEF6; --rs-t:#E8ECF0; --tim-t:#F7D9DF; --hard-t:#D8E5F6; --soft-t:#DAEFDD; --ps-t:#F1E5CF;
+  --fontT:"Archivo","Segoe UI",system-ui,-apple-system,sans-serif;
+  --fontM:"JetBrains Mono",ui-monospace,SFMono-Regular,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  #fh-root:not([data-theme="light"]){
+  --paper:#10161D; --panel:#18212B; --ink:#E3E9EF; --muted:#9AA7B4; --rule:#2E3B48; --soft:#202B36;
+  --eth:#9AAFC9; --ec:#E7A15E; --or:#4FC4BA; --pl:#A68CF0; --rs:#6C7885;
+  --tim:#F07590; --hard:#6EA5EE; --soft-ip:#79C987; --ps:#D9A95A;
+  --eth-t:#27313F; --ec-t:#3A2A18; --or-t:#15332F; --pl-t:#2A2342; --rs-t:#222B34; --tim-t:#3D1C24; --hard-t:#1B2B42; --soft-t:#1B3322; --ps-t:#382B14;
+  }
+}
+#fh-root[data-theme="dark"]{
+  --paper:#10161D; --panel:#18212B; --ink:#E3E9EF; --muted:#9AA7B4; --rule:#2E3B48; --soft:#202B36;
+  --eth:#9AAFC9; --ec:#E7A15E; --or:#4FC4BA; --pl:#A68CF0; --rs:#6C7885;
+  --tim:#F07590; --hard:#6EA5EE; --soft-ip:#79C987; --ps:#D9A95A;
+  --eth-t:#27313F; --ec-t:#3A2A18; --or-t:#15332F; --pl-t:#2A2342; --rs-t:#222B34; --tim-t:#3D1C24; --hard-t:#1B2B42; --soft-t:#1B3322; --ps-t:#382B14;
+}
+#fh-root section{scroll-margin-top:24px}
+#fh-root *,#fh-root *::before,#fh-root *::after{box-sizing:inherit}
+#fh-root{margin:0;background:var(--paper);color:var(--ink);font-family:var(--fontT);font-size:16.5px;line-height:1.55;font-variation-settings:"wdth" 96;text-align:left;letter-spacing:normal;
+  width:100vw;max-width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);position:relative;}
+body:has(#fh-root){overflow-x:hidden}
+#fh-root h1,#fh-root h2,#fh-root h3,#fh-root p,#fh-root li,#fh-root table,#fh-root button,#fh-root input,#fh-root select{font-family:inherit;text-transform:none;letter-spacing:normal}
+#fh-root h1,#fh-root h2,#fh-root h3{color:var(--ink);font-style:normal}#fh-root p,#fh-root li,#fh-root td,#fh-root th{line-height:1.55;font-size:inherit}#fh-root .lede{line-height:1.5}#fh-root input,#fh-root select{border-style:solid;border-width:1px;box-shadow:none}#fh-root a{text-decoration:underline;text-decoration-style:solid}#fh-root nav.toc a{text-decoration:none}#fh-root p{margin:0 0 1em}#fh-root ul,#fh-root ol{margin-top:0}#fh-root table{margin:0;border:0;table-layout:auto;background:none;border-collapse:collapse}#fh-root th,#fh-root td{border-left:0;border-right:0;border-top:0;background:none}
+#fh-root svg{height:auto;display:block}#fh-root button{box-shadow:none;text-shadow:none;line-height:1.3;min-height:0;height:auto}
+
+#fh-root img,#fh-root svg{max-width:100%}
+#fh-root a{color:var(--hard)}
+#fh-root a:focus-visible,#fh-root button:focus-visible,#fh-root input:focus-visible,#fh-root select:focus-visible,#fh-root summary:focus-visible{outline:2px solid var(--tim);outline-offset:2px}
+#fh-root .shell{display:grid;grid-template-columns:230px minmax(0,1fr);gap:0;max-width:1320px;margin:0 auto}
+#fh-root nav.toc{position:sticky;top:var(--wp-admin--admin-bar--height,0px);align-self:start;height:100vh;overflow:auto;padding:28px 18px 28px 22px;border-right:1px solid var(--rule);font-size:14px}
+#fh-root nav.toc ol{list-style:none;margin:0;padding:0;counter-reset:t}
+#fh-root nav.toc li{counter-increment:t;margin:0 0 6px}
+#fh-root nav.toc a{color:var(--muted);text-decoration:none;display:block;padding:3px 0 3px 26px;position:relative}
+#fh-root nav.toc a::before{content:counter(t);position:absolute;left:0;font-family:var(--fontM);font-size:12px;color:var(--rule)}
+#fh-root nav.toc a:hover,#fh-root nav.toc a.on{color:var(--ink)}
+#fh-root nav.toc a.on::before{color:var(--tim)}
+#fh-root .toc-title{font-weight:700;font-size:13px;color:var(--ink);margin:0 0 14px;font-variation-settings:"wdth" 110}
+#fh-root .themebtn{margin-top:18px;background:none;border:1px solid var(--rule);color:var(--muted);border-radius:4px;padding:5px 9px;font:inherit;font-size:13px;cursor:pointer}
+#fh-root .fh-main{padding:36px clamp(16px,4vw,56px) 80px;min-width:0}
+#fh-root .mtoc{display:none}
+#fh-root .hero{padding:10px 0 34px;border-bottom:1px solid var(--rule);margin-bottom:12px}
+#fh-root h1{font-size:clamp(34px,6vw,64px);line-height:1.02;margin:0 0 14px;font-weight:800;font-variation-settings:"wdth" 118;letter-spacing:-0.01em;max-width:15ch}
+#fh-root .lede{font-size:18px;color:var(--muted);max-width:62ch;margin:0 0 26px}
+#fh-root h2{font-size:clamp(24px,3.2vw,32px);line-height:1.15;margin:64px 0 10px;font-weight:750;font-variation-settings:"wdth" 112;display:flex;gap:14px;align-items:baseline}
+#fh-root h2 .n{font-family:var(--fontM);font-size:14px;color:var(--tim);font-weight:600;min-width:24px}
+#fh-root h3{font-size:19px;margin:34px 0 8px;font-weight:700;font-variation-settings:"wdth" 104}
+#fh-root p,#fh-root li{max-width:74ch}
+#fh-root .sub{color:var(--muted);margin-top:0}
+#fh-root .fig{background:var(--panel);border:1px solid var(--rule);border-radius:10px;padding:18px;margin:20px 0}
+#fh-root .fig.flush{padding:0;overflow:hidden}
+#fh-root .cap{font-size:13.5px;color:var(--muted);margin:10px 2px 0;max-width:none}
+#fh-root .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+#fh-root .scroll>svg,#fh-root .scroll>.bits{min-width:720px}
+#fh-root table{border-collapse:collapse;width:100%;font-size:14.5px}
+#fh-root th,#fh-root td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+#fh-root th{font-weight:650;font-size:13px;color:var(--muted);font-variation-settings:"wdth" 108}
+#fh-root td code,#fh-root p code,#fh-root li code{font-family:var(--fontM);font-size:0.86em;background:var(--soft);padding:1px 5px;border-radius:3px}
+#fh-root .tag{display:inline-block;font-size:12px;padding:1px 7px;border-radius:3px;font-weight:600;white-space:nowrap}
+#fh-root .t-eth{background:var(--eth-t);color:var(--eth)} #fh-root .t-ec{background:var(--ec-t);color:var(--ec)} #fh-root .t-or{background:var(--or-t);color:var(--or)} #fh-root .t-pl{background:var(--pl-t);color:var(--pl)} #fh-root .t-tim{background:var(--tim-t);color:var(--tim)} #fh-root .t-hard{background:var(--hard-t);color:var(--hard)} #fh-root .t-soft{background:var(--soft-t);color:var(--soft-ip)} #fh-root .t-ps{background:var(--ps-t);color:var(--ps)}
+#fh-root .note{border-left:3px solid var(--tim);padding:6px 0 6px 14px;margin:18px 0;color:var(--ink);max-width:74ch}
+#fh-root .note b{color:var(--tim)}
+#fh-root .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+#fh-root .grid4{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:700px){#fh-root .grid2,#fh-root .grid4{grid-template-columns:1fr}}
+
+#fh-root /* packet ribbon */
+.ribbon{display:flex;height:74px;border-radius:6px;overflow:hidden;border:1px solid var(--rule)}
+#fh-root .ribbon button{border:0;margin:0;padding:6px 4px;font:inherit;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;text-align:left;min-width:0;color:var(--ink);border-right:1px solid var(--panel)}
+#fh-root .ribbon button span{font-size:11.5px;line-height:1.15;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#fh-root .ribbon button small{font-family:var(--fontM);font-size:10.5px;color:var(--muted)}
+#fh-root .ribbon button[aria-pressed="true"]{box-shadow:inset 0 -4px 0 var(--ink)}
+#fh-root .legend{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:12px;font-size:13px;color:var(--muted)}
+#fh-root .legend i{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+
+#fh-root /* bit diagrams */
+.tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+#fh-root .tabs button{font:inherit;font-size:13.5px;border:1px solid var(--rule);background:var(--paper);color:var(--muted);padding:5px 11px;border-radius:20px;cursor:pointer}
+#fh-root .tabs button[aria-selected="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+#fh-root .bits{display:grid;grid-template-columns:52px repeat(32,minmax(0,1fr));gap:2px;font-family:var(--fontM);font-size:11px}
+#fh-root .bits .hd{color:var(--muted);text-align:center;font-size:10px;padding-bottom:2px}
+#fh-root .bits .off{color:var(--muted);font-size:10.5px;display:flex;align-items:center}
+#fh-root .bits .f{border-radius:3px;padding:5px 4px;min-height:40px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;overflow:hidden;line-height:1.15;cursor:default;border:1px solid transparent}
+#fh-root .bits .f b{font-weight:600;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+#fh-root .bits .f em{font-style:normal;font-size:9.5px;opacity:.75}
+#fh-root .bits .f:hover{border-color:var(--ink)}
+#fh-root .c-eth{background:var(--eth-t);color:var(--eth)} #fh-root .c-ec{background:var(--ec-t);color:var(--ec)} #fh-root .c-or{background:var(--or-t);color:var(--or)} #fh-root .c-pl{background:var(--pl-t);color:var(--pl)} #fh-root .c-rs{background:var(--rs-t);color:var(--rs)}
+#fh-root .fdesc{min-height:48px;font-size:14px;margin-top:12px;padding:10px 12px;background:var(--soft);border-radius:6px}
+#fh-root .fdesc b{font-family:var(--fontM);font-size:13px}
+
+#fh-root /* controls */
+.ctl{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px 16px;margin-bottom:16px}
+#fh-root .ctl label{font-size:12.5px;color:var(--muted);display:flex;flex-direction:column;gap:4px}
+#fh-root #tFibV{color:var(--ink);font-weight:650}
+#fh-root .ctl select,#fh-root .ctl input[type=number]{font:inherit;font-size:14.5px;padding:6px 8px;border:1px solid var(--rule);border-radius:5px;background:var(--paper);color:var(--ink);width:100%}
+#fh-root .ctl input[type=range]{width:100%;accent-color:var(--tim)}
+#fh-root .out{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+#fh-root .out div{background:var(--soft);border-radius:6px;padding:10px 12px}
+#fh-root .out b{display:block;font-size:22px;font-variation-settings:"wdth" 110;font-weight:700;line-height:1.1}
+#fh-root .out span{font-size:12.5px;color:var(--muted)}
+#fh-root .ok{color:var(--soft-ip)} #fh-root .bad{color:var(--tim)}
+#fh-root .bar{height:26px;border-radius:4px;display:flex;overflow:hidden;background:var(--soft);margin:6px 0}
+#fh-root .bar div{height:100%;display:flex;align-items:center;padding:0 8px;font-size:12px;white-space:nowrap;overflow:hidden;color:#fff}
+
+#fh-root /* svg class palette */
+svg text{font-family:var(--fontT);fill:var(--ink)}
+#fh-root svg .mono{font-family:var(--fontM)}
+#fh-root svg .mut{fill:var(--muted)}
+#fh-root svg .sm{font-size:11px} #fh-root svg .md{font-size:13px} #fh-root svg .lg{font-size:15px;font-weight:700}
+#fh-root .s-eth{fill:var(--eth-t);stroke:var(--eth)} #fh-root .s-ec{fill:var(--ec-t);stroke:var(--ec)} #fh-root .s-or{fill:var(--or-t);stroke:var(--or)} #fh-root .s-pl{fill:var(--pl-t);stroke:var(--pl)}
+#fh-root .s-tim{fill:var(--tim-t);stroke:var(--tim)} #fh-root .s-hard{fill:var(--hard-t);stroke:var(--hard)} #fh-root .s-soft{fill:var(--soft-t);stroke:var(--soft-ip)} #fh-root .s-ps{fill:var(--ps-t);stroke:var(--ps)} #fh-root .s-plain{fill:var(--panel);stroke:var(--rule)} #fh-root .s-soft2{fill:var(--soft);stroke:var(--rule)}
+#fh-root .ln{stroke:var(--muted);fill:none;stroke-width:1.4} #fh-root .ln-t{stroke:var(--tim);fill:none;stroke-width:1.6} #fh-root .ln-h{stroke:var(--hard);fill:none;stroke-width:1.6} #fh-root .ln-o{stroke:var(--or);fill:none;stroke-width:1.6} #fh-root .ln-p{stroke:var(--ps);fill:none;stroke-width:1.4;stroke-dasharray:4 3}
+#fh-root .dash{stroke-dasharray:5 4}
+#fh-root .fill-t{fill:var(--tim)} #fh-root .fill-h{fill:var(--hard)} #fh-root .fill-o{fill:var(--or)} #fh-root .fill-m{fill:var(--muted)} #fh-root .fill-ec{fill:var(--ec)} #fh-root .fill-pl{fill:var(--pl)} #fh-root .fill-s{fill:var(--soft-ip)} #fh-root .fill-e{fill:var(--eth)}
+#fh-root .fh-foot{margin-top:70px;padding-top:18px;border-top:1px solid var(--rule);font-size:13px;color:var(--muted)}
+#fh-root ol.refs li{margin-bottom:6px;font-size:14px}
+@media (max-width:900px){
+  #fh-root .shell{grid-template-columns:1fr}
+  #fh-root nav.toc{display:none}
+  #fh-root .mtoc{display:block;margin:0 0 18px;background:var(--panel);border:1px solid var(--rule);border-radius:8px;padding:8px 14px;font-size:14px}
+  #fh-root .mtoc summary{cursor:pointer;font-weight:650}
+  #fh-root .mtoc ol{margin:8px 0 4px;padding-left:22px}
+  #fh-root .mtoc a{color:var(--muted)}
+}
+@media (prefers-reduced-motion:reduce){#fh-root *{transition:none!important;animation:none!important}}
+
+</style>
+<div id="fh-root">
+<div class="shell">
+<nav class="toc" aria-label="Contents">
+  <p class="toc-title">Contents</p>
+  <ol id="tocList"></ol>
+  <button class="themebtn" id="themeBtn" type="button">Toggle light/dark</button>
+</nav>
+<div class="fh-main">
+<details class="mtoc"><summary>Contents</summary><ol id="mtocList"></ol></details>
+
+<div class="hero">
+  <h1>Split 7.2x fronthaul on the RFSoC DFE</h1>
+  <p class="lede">An engineering reference to eCPRI and the O-RAN CUS-plane, read from the O-RU side: every header down to the bit, how the timing windows and sync plane work, and how the whole thing maps onto a Zynq UltraScale+ RFSoC DFE (ZU6xDR) radio.</p>
+  <div class="fig" style="margin-bottom:0">
+    <div class="scroll"><div class="ribbon" id="heroRibbon" role="group" aria-label="One downlink U-plane Ethernet frame" style="min-width:680px"></div></div>
+    <div class="legend">
+      <span><i style="background:var(--eth)"></i>Ethernet / VLAN</span>
+      <span><i style="background:var(--ec)"></i>eCPRI transport</span>
+      <span><i style="background:var(--or)"></i>O-RAN application headers</span>
+      <span><i style="background:var(--pl)"></i>IQ payload</span>
+      <span><i style="background:var(--tim)"></i>Timing and clocks</span>
+    </div>
+    <p class="cap">One downlink U-plane frame carrying 53 PRBs of 9-bit BFP IQ in a 1500-byte MTU, drawn to scale. Tap a segment to open its bit layout in section 4. These colors mean the same layer in every diagram below.</p>
+  </div>
+</div>
+
+
+<section id="s-split">
+<h2><span class="n">1</span>Where Split 7.2x sits</h2>
+<p class="sub">The O-RAN lower-layer split cuts the PHY in two. Everything above resource-element mapping stays in the O-DU; the FFT, cyclic prefix and everything toward the antenna live in the O-RU.</p>
+<div class="fig scroll">
+<svg viewBox="0 0 1000 430" role="img" aria-label="RAN protocol stack with split options 2, 6, 7.2x and 8">
+  <text x="20" y="28" class="lg">O-CU</text><text x="20" y="46" class="sm mut">RRC, SDAP, PDCP</text>
+  <rect x="150" y="14" width="330" height="36" rx="5" class="s-plain"/><text x="165" y="37" class="md">RRC / SDAP / PDCP</text>
+  <line x1="130" y1="62" x2="560" y2="62" class="ln dash"/><text x="570" y="66" class="md mut">Option 2 (F1 midhaul)</text>
+  <text x="20" y="100" class="lg">O-DU</text><text x="20" y="118" class="sm mut">RLC, MAC, High-PHY</text>
+  <rect x="150" y="76" width="330" height="32" rx="5" class="s-plain"/><text x="165" y="97" class="md">RLC</text>
+  <rect x="150" y="114" width="330" height="32" rx="5" class="s-plain"/><text x="165" y="135" class="md">MAC (scheduler, HARQ)</text>
+  <line x1="130" y1="156" x2="560" y2="156" class="ln dash"/><text x="570" y="160" class="md mut">Option 6 (MAC / PHY, nFAPI)</text>
+  <rect x="150" y="166" width="330" height="96" rx="5" class="s-or" style="stroke-width:1.2"/>
+  <text x="165" y="186" class="md" style="font-weight:650">High-PHY</text>
+  <text x="165" y="205" class="sm">LDPC / polar coding, rate matching, scrambling</text>
+  <text x="165" y="222" class="sm">modulation, layer mapping, precoding (Cat A)</text>
+  <text x="165" y="239" class="sm">RE mapping; UL: channel estimation, equalisation,</text>
+  <text x="165" y="255" class="sm">demodulation, decoding</text>
+  <line x1="130" y1="276" x2="560" y2="276" style="stroke:var(--tim);stroke-width:3"/>
+  <text x="570" y="272" class="md" style="font-weight:700;fill:var(--tim)">Option 7.2x: eCPRI over Ethernet</text>
+  <text x="570" y="290" class="sm mut">frequency-domain IQ per PRB, per symbol, per eAxC</text>
+  <text x="20" y="306" class="lg">O-RU</text><text x="20" y="324" class="sm mut">Low-PHY + RF</text>
+  <rect x="150" y="288" width="330" height="72" rx="5" class="s-hard"/>
+  <text x="165" y="308" class="md" style="font-weight:650">Low-PHY</text>
+  <text x="165" y="326" class="sm">precoding (Cat B), digital beamforming, iFFT / FFT,</text>
+  <text x="165" y="343" class="sm">CP add / remove, PRACH extraction, (de)compression</text>
+  <line x1="130" y1="370" x2="560" y2="370" class="ln dash"/><text x="570" y="374" class="md mut">Option 8 (CPRI time-domain IQ)</text>
+  <rect x="150" y="380" width="330" height="36" rx="5" class="s-soft"/><text x="165" y="403" class="md">DFE and RF: DUC / DDC, CFR, DPD, RF-DAC / RF-ADC</text>
+  <g transform="translate(790,110)">
+    <text x="0" y="0" class="md" style="font-weight:650">What the split trades</text>
+    <text x="0" y="24" class="sm mut">higher split  ⟶  lower fronthaul rate,</text>
+    <text x="0" y="40" class="sm mut">more work and state in the radio</text>
+    <text x="0" y="68" class="sm">7.2x rate scales with PRBs × layers,</text>
+    <text x="0" y="84" class="sm">not with antennas × sample rate</text>
+    <text x="0" y="112" class="sm">Timing still tight: HARQ loop and</text>
+    <text x="0" y="128" class="sm">symbol-level delivery windows</text>
+  </g>
+</svg>
+</div>
+<p>The "x" in 7.2x reflects the two O-RU categories O-RAN allows. A <b>Category A</b> O-RU receives already-precoded layer data, so each spatial stream on the fronthaul maps to a transmit path. A <b>Category B</b> O-RU does precoding itself, which is what enables modulation compression on the downlink and keeps massive-MIMO fronthaul proportional to layers, not antennas. The uplink is asymmetric in both categories: the O-RU does FFT and optional digital beamforming, but channel estimation and equalisation stay in the O-DU.</p>
+</section>
+
+
+<section id="s-chain">
+<h2><span class="n">2</span>What crosses the split</h2>
+<p class="sub">Downlink and uplink processing chains, with the fronthaul in the middle. PRACH takes its own path through the O-RU.</p>
+<div class="fig scroll">
+<svg viewBox="0 0 1000 400" role="img" aria-label="Downlink and uplink chains across the O-DU, fronthaul and O-RU">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="fill-m"/></marker>
+    <marker id="art" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="fill-t"/></marker>
+  </defs>
+  <text x="20" y="24" class="lg">O-DU</text><text x="410" y="24" class="lg" style="fill:var(--tim)">Fronthaul</text><text x="560" y="24" class="lg">O-RU</text>
+  <rect x="395" y="36" width="140" height="350" rx="6" class="s-tim" style="stroke-width:1;opacity:.55"/>
+  <text x="20" y="58" class="md" style="font-weight:650">Downlink</text>
+  <g class="md">
+    <rect x="20" y="70" width="110" height="46" rx="5" class="s-plain"/><text x="30" y="90" class="sm">LDPC encode,</text><text x="30" y="106" class="sm">rate match</text>
+    <rect x="140" y="70" width="110" height="46" rx="5" class="s-plain"/><text x="150" y="90" class="sm">scramble,</text><text x="150" y="106" class="sm">modulate</text>
+    <rect x="260" y="70" width="120" height="46" rx="5" class="s-plain"/><text x="270" y="90" class="sm">layer map, RE map</text><text x="270" y="106" class="sm">precode (Cat A)</text>
+    <rect x="405" y="70" width="120" height="46" rx="5" class="s-pl"/><text x="415" y="90" class="sm">compress (BFP)</text><text x="415" y="106" class="sm">C-plane + U-plane</text>
+    <rect x="555" y="70" width="100" height="46" rx="5" class="s-hard"/><text x="565" y="90" class="sm">decompress,</text><text x="565" y="106" class="sm">precode (Cat B)</text>
+    <rect x="665" y="70" width="95" height="46" rx="5" class="s-hard"/><text x="675" y="90" class="sm">beamform,</text><text x="675" y="106" class="sm">iFFT</text>
+    <rect x="770" y="70" width="95" height="46" rx="5" class="s-hard"/><text x="780" y="90" class="sm">CP insert,</text><text x="780" y="106" class="sm">window</text>
+    <rect x="875" y="70" width="105" height="46" rx="5" class="s-soft"/><text x="885" y="90" class="sm">DUC, CFR,</text><text x="885" y="106" class="sm">DPD, RF-DAC</text>
+  </g>
+  <path d="M130 93H140M250 93H260M380 93H405M525 93H555M655 93H665M760 93H770M865 93H875" class="ln" marker-end="url(#ar)"/>
+  <text x="20" y="176" class="md" style="font-weight:650">Uplink</text>
+  <g>
+    <rect x="875" y="188" width="105" height="46" rx="5" class="s-soft"/><text x="885" y="208" class="sm">RF-ADC, DDC,</text><text x="885" y="224" class="sm">filter, equalise</text>
+    <rect x="770" y="188" width="95" height="46" rx="5" class="s-hard"/><text x="780" y="208" class="sm">CP remove,</text><text x="780" y="224" class="sm">FFT</text>
+    <rect x="665" y="188" width="95" height="46" rx="5" class="s-hard"/><text x="675" y="208" class="sm">beamform,</text><text x="675" y="224" class="sm">PRB select</text>
+    <rect x="555" y="188" width="100" height="46" rx="5" class="s-hard"/><text x="565" y="208" class="sm">compress,</text><text x="565" y="224" class="sm">packetise</text>
+    <rect x="405" y="188" width="120" height="46" rx="5" class="s-pl"/><text x="415" y="208" class="sm">U-plane (UL)</text><text x="415" y="224" class="sm">in Ta4 window</text>
+    <rect x="260" y="188" width="120" height="46" rx="5" class="s-plain"/><text x="270" y="208" class="sm">decompress, ch.</text><text x="270" y="224" class="sm">estimate (DMRS)</text>
+    <rect x="140" y="188" width="110" height="46" rx="5" class="s-plain"/><text x="150" y="208" class="sm">equalise (MMSE),</text><text x="150" y="224" class="sm">demodulate</text>
+    <rect x="20" y="188" width="110" height="46" rx="5" class="s-plain"/><text x="30" y="208" class="sm">LDPC decode,</text><text x="30" y="224" class="sm">HARQ combine</text>
+  </g>
+  <path d="M875 211H865M770 211H760M665 211H655M555 211H525M405 211H380M260 211H250M140 211H130" class="ln" marker-end="url(#ar)"/>
+  <text x="20" y="284" class="md" style="font-weight:650">PRACH</text>
+  <rect x="875" y="296" width="105" height="46" rx="5" class="s-soft"/><text x="885" y="316" class="sm">RF-ADC, DDC</text><text x="885" y="332" class="sm">(shared)</text>
+  <rect x="665" y="296" width="200" height="46" rx="5" class="s-hard"/><text x="675" y="316" class="sm">PRACH mix, decimate, FFT</text><text x="675" y="332" class="sm">(section type 3 timing)</text>
+  <rect x="405" y="296" width="120" height="46" rx="5" class="s-pl"/><text x="415" y="316" class="sm">U-plane, PRACH</text><text x="415" y="332" class="sm">eAxC / filterIndex</text>
+  <rect x="140" y="296" width="240" height="46" rx="5" class="s-plain"/><text x="150" y="316" class="sm">preamble detection, timing advance</text><text x="150" y="332" class="sm">estimate</text>
+  <path d="M875 319H865M665 319H525M405 319H380" class="ln" marker-end="url(#ar)"/>
+  <text x="560" y="376" class="sm mut">Blue = Low-PHY in the O-RU. Green = DFE / RF. Violet = what actually travels on the wire.</text>
+</svg>
+</div>
+<div class="scroll">
+<table>
+<thead><tr><th>Function</th><th>O-DU</th><th>O-RU Cat A</th><th>O-RU Cat B</th></tr></thead>
+<tbody>
+<tr><td>Precoding (DL)</td><td>Yes (Cat A)</td><td>No</td><td>Yes</td></tr>
+<tr><td>Digital beamforming weights</td><td>Sends beamId or weights (ext 1)</td><td>Predefined beams by beamId</td><td>Beams by beamId, weights, or computed from type 5/6 info</td></tr>
+<tr><td>Modulation compression (DL)</td><td>—</td><td>Not usable</td><td>Allowed (ext 4 / 5)</td></tr>
+<tr><td>iFFT / FFT, CP</td><td>—</td><td>Yes</td><td>Yes</td></tr>
+<tr><td>PRACH filtering + FFT</td><td>Detection only</td><td>Yes</td><td>Yes</td></tr>
+<tr><td>UL equalisation</td><td>Yes</td><td>No</td><td>No</td></tr>
+</tbody></table>
+</div>
+</section>
+
+
+<section id="s-planes">
+<h2><span class="n">3</span>The four planes</h2>
+<p class="sub">O-RAN WG4 splits the fronthaul into Control, User, Synchronisation and Management planes. Only C and U ride on eCPRI.</p>
+<div class="scroll"><table>
+<thead><tr><th>Plane</th><th>Carries</th><th>Transport</th><th>Real-time?</th><th>On the RFSoC DFE</th></tr></thead>
+<tbody>
+<tr><td><span class="tag t-or">C-plane</span></td><td>Per-symbol scheduling and beamforming commands: which PRBs, which symbols, which beam, compression, PRACH and TDD pattern</td><td>eCPRI type 2 (or IEEE 1914.3), Ethernet or UDP/IP</td><td>Yes, must arrive before the U-plane it describes</td><td>O-RAN Radio IF core in PL</td></tr>
+<tr><td><span class="tag t-pl">U-plane</span></td><td>Frequency-domain IQ per PRB per symbol per eAxC, DL and UL, plus PRACH</td><td>eCPRI type 0</td><td>Yes, bounded by T2a and Ta3 windows</td><td>O-RAN Radio IF core, symbol buffers, Low-PHY</td></tr>
+<tr><td><span class="tag t-tim">S-plane</span></td><td>Phase, frequency and time of day</td><td>PTP (IEEE 1588, G.8275.1/.2) + SyncE</td><td>Continuous</td><td>PCS timestamping in PL, ptp4l servo on A53, external DPLL</td></tr>
+<tr><td><span class="tag t-ps">M-plane</span></td><td>Configuration, delay profile, eAxC widths, compression, carriers, alarms, software</td><td>NETCONF/YANG over SSH or TLS, over IP</td><td>No</td><td>Linux on the PS via DMA path</td></tr>
+</tbody></table></div>
+</section>
+
+
+<section id="s-anatomy">
+<h2><span class="n">4</span>Packet anatomy, bit by bit</h2>
+<p class="sub">All fields are big-endian (network byte order); bit 0 in the header row is the most significant bit of each byte, matching the O-RAN and eCPRI figures. Hover or tap a field for its meaning.</p>
+<div class="fig">
+  <div class="tabs" role="tablist" id="bitTabs"></div>
+  <div class="scroll"><div class="bits" id="bitGrid"></div></div>
+  <div class="fdesc" id="bitDesc">Select a field.</div>
+</div>
+<p>A U-plane packet is Ethernet header + VLAN + eCPRI common header (4 bytes) + eCPRI transport header (4 bytes: eAxC ID and sequence ID) + O-RAN common header (4 bytes) + one or more section headers, each followed by its PRB payload. A C-plane type 1 message has an 8-byte O-RAN common header followed by 8-byte section descriptors, plus any section extensions.</p>
+<div class="note"><b>Two fields that trip everyone.</b> <code>numPrbu</code> and <code>numPrbc</code> are 8 bits, so they cannot say 273. The value 0 means "all PRBs of the carrier". And the U-plane <code>udCompHdr</code> is only present when compression is configured as dynamic over the M-plane. If the O-DU and O-RU disagree on static versus dynamic, the whole PRB payload shifts by two bytes and the IQ turns to noise.</div>
+</section>
+
+
+<section id="s-ecpri">
+<h2><span class="n">5</span>eCPRI layer</h2>
+<p class="sub">eCPRI 2.0 defines a thin header over Ethernet (EtherType <code>0xAEFE</code>) or UDP. O-RAN uses a small subset of it.</p>
+<div class="scroll"><table>
+<thead><tr><th>Type</th><th>Message</th><th>Used by O-RAN 7.2x</th></tr></thead>
+<tbody>
+<tr><td><code>0</code></td><td>IQ data</td><td>U-plane (DL, UL, PRACH)</td></tr>
+<tr><td><code>1</code></td><td>Bit sequence</td><td>No</td></tr>
+<tr><td><code>2</code></td><td>Real-time control data</td><td>C-plane</td></tr>
+<tr><td><code>3</code></td><td>Generic data transfer</td><td>No</td></tr>
+<tr><td><code>4</code></td><td>Remote memory access</td><td>No</td></tr>
+<tr><td><code>5</code></td><td>One-way delay measurement</td><td>Optional, for measuring T12 and T34 in-band</td></tr>
+<tr><td><code>6</code> / <code>7</code></td><td>Remote reset / event indication</td><td>No (M-plane does this)</td></tr>
+<tr><td><code>8–11</code></td><td>Interworking function (CPRI ↔ eCPRI)</td><td>No</td></tr>
+<tr><td><code>64–255</code></td><td>Vendor specific</td><td>Vendor extensions only</td></tr>
+</tbody></table></div>
+<h3>eAxC ID: the 16-bit stream address</h3>
+<p>The eCPRI <code>ecpriRtcid</code> / <code>ecpriPcid</code> field is reinterpreted by O-RAN as the extended Antenna-Carrier ID. Its four sub-fields have widths set per deployment over the M-plane; the only rule is that they sum to 16 and both ends agree. Adjust the split below to see the address space.</p>
+<div class="fig">
+  <div class="ctl" id="eaxcCtl"></div>
+  <div class="bar" id="eaxcBar" style="height:40px"></div>
+  <div class="out" id="eaxcOut"></div>
+</div>
+<h3>Sequence ID</h3>
+<p><code>ecpriSeqid</code> is an 8-bit Sequence ID incremented per eAxC per plane, then an E-bit and a 7-bit Subsequence ID. O-RAN does not fragment at the eCPRI layer, so in practice E = 1 and Subsequence ID = 0 on every packet. Large symbols are split at the application layer instead, by sending several sections (each covering a PRB range) in separate packets. The O-RU uses the Sequence ID to count lost and out-of-order packets per stream.</p>
+</section>
+
+
+<section id="s-cplane">
+<h2><span class="n">6</span>C-plane section types and extensions</h2>
+<div class="scroll"><table>
+<thead><tr><th>Section type</th><th>Purpose</th><th>Common header</th><th>Per section</th></tr></thead>
+<tbody>
+<tr><td><code>0</code></td><td>Idle or guard periods: unused RBs or symbols, TDD transitions</td><td>12 B (timeOffset, frameStructure, cpLength)</td><td>8 B</td></tr>
+<tr><td><code>1</code></td><td>Most DL and UL channels: PDSCH, PDCCH, PUSCH, PUCCH, SSB, CSI-RS, SRS</td><td>8 B (udCompHdr)</td><td>8 B + extensions</td></tr>
+<tr><td><code>3</code></td><td>PRACH and mixed-numerology channels</td><td>12 B (timeOffset, FFT size, SCS, cpLength)</td><td>12 B (adds 24-bit frequencyOffset)</td></tr>
+<tr><td><code>5</code></td><td>UE scheduling info so a Cat B O-RU can compute beam weights</td><td>8 B</td><td>8 B (ueId instead of beamId)</td></tr>
+<tr><td><code>6</code></td><td>Per-UE channel information (e.g. from SRS) for O-RU weight calculation</td><td>numberOfUEs</td><td>Per UE: ueId, PRB range, channel IQ</td></tr>
+<tr><td><code>7</code></td><td>LAA / unlicensed listen-before-talk messages</td><td>—</td><td>—</td></tr>
+</tbody></table></div>
+<p>Later CUS-plane versions add further types (for example slot configuration and ACK/NACK feedback); check the spec version negotiated over the M-plane before relying on them. The <code>ef</code> bit in a section says that a section extension follows. Extensions frequently met in O-RU work:</p>
+<div class="scroll"><table>
+<thead><tr><th>Ext</th><th>Content</th><th>Where it bites</th></tr></thead>
+<tbody>
+<tr><td><code>1</code></td><td>Beamforming weights (per section, compressed)</td><td>Weight RAM bandwidth in the O-RU; must be applied on the right symbol</td></tr>
+<tr><td><code>2</code></td><td>Beamforming attributes (azimuth, zenith)</td><td>Only if the O-RU computes beams from angles</td></tr>
+<tr><td><code>3</code></td><td>DL precoding configuration (layer, code-book, LTE TM)</td><td>Cat B only</td></tr>
+<tr><td><code>4</code> / <code>5</code></td><td>Modulation compression parameters (csf, modCompScaler)</td><td>Cat B DL; the U-plane carries only constellation bits</td></tr>
+<tr><td><code>6</code></td><td>Non-contiguous PRB allocation (rbgMask)</td><td>Section parser must expand RBG masks</td></tr>
+<tr><td><code>10</code></td><td>Grouping of several eAxCs under one section</td><td>One C-plane message fans out to many RU ports</td></tr>
+<tr><td><code>11</code></td><td>Flexible beamforming weights per PRB bundle</td><td>Large messages; plan the C-plane buffer size</td></tr>
+</tbody></table></div>
+</section>
+
+
+<section id="s-iq">
+<h2><span class="n">7</span>IQ data formats and compression</h2>
+<p class="sub">Each PRB is 12 resource elements, each a complex (I, Q) pair. Compression is defined per PRB, selected by <code>udCompMeth</code> and <code>udIqWidth</code> (0 in that field means 16).</p>
+<div class="scroll"><table>
+<thead><tr><th>udCompMeth</th><th>Method</th><th>Per-PRB parameter (udCompParam)</th><th>Typical width</th><th>Bytes per PRB</th></tr></thead>
+<tbody>
+<tr><td><code>0</code></td><td>No compression</td><td>none</td><td>16</td><td>48</td></tr>
+<tr><td><code>1</code></td><td>Block floating point</td><td>1 B: 4 reserved + 4-bit exponent</td><td>9 / 12 / 14</td><td>28 / 37 / 43</td></tr>
+<tr><td><code>2</code></td><td>Block scaling</td><td>1 B blockScaler</td><td>9–12</td><td>28–37</td></tr>
+<tr><td><code>3</code></td><td>μ-law</td><td>1 B: compBitWidth + compShift</td><td>8–9</td><td>25–28</td></tr>
+<tr><td><code>4</code></td><td>Modulation compression</td><td>none (parameters in C-plane ext 4/5)</td><td>1–4 (QPSK–256QAM)</td><td>3–12</td></tr>
+<tr><td><code>5</code> / <code>6</code></td><td>BFP / mod-comp with selective RE sending</td><td>as above + RE mask</td><td>—</td><td>varies</td></tr>
+</tbody></table></div>
+<p>Bytes per PRB is always an integer because 12 × 2 × <i>w</i> bits = 3<i>w</i> bytes. That is why the RFSoC-side decompressor can work on byte-aligned PRB records even for odd widths like 9.</p>
+<h3>Block floating point, live</h3>
+<p>BFP finds the largest |I| or |Q| in the PRB, picks one shared exponent so the largest value fits in a signed <i>w</i>-bit mantissa, and shifts all 24 values right by it. Drag the width to see the quantisation cost on a random 16-bit OFDM-like PRB.</p>
+<div class="fig">
+  <div class="ctl">
+    <label>Mantissa width (udIqWidth) <input type="range" id="bfpW" min="6" max="16" value="9"></label>
+    <label>Signal level below full scale (dB) <input type="range" id="bfpL" min="0" max="30" value="12"></label>
+    <label>&nbsp;<button class="themebtn" style="margin:0" id="bfpNew" type="button">New random PRB</button></label>
+  </div>
+  <div class="scroll"><svg id="bfpSvg" viewBox="0 0 960 230" role="img" aria-label="BFP compression of 24 values"></svg></div>
+  <div class="out" id="bfpOut" style="margin-top:12px"></div>
+</div>
+</section>
+
+
+<section id="s-numerology">
+<h2><span class="n">8</span>Frame, slot and symbol addressing</h2>
+<p class="sub">Every C- and U-plane message names the symbol it belongs to with four fields. Together they are the O-RU's only notion of "when".</p>
+<div class="fig scroll">
+<svg viewBox="0 0 1000 300" role="img" aria-label="10 ms radio frame broken into subframes, slots and symbols with field widths">
+  <text x="20" y="26" class="md" style="font-weight:650">frameId <tspan class="mono sm mut">8 bits, SFN mod 256, 10 ms</tspan></text>
+  <rect x="20" y="36" width="960" height="30" rx="4" class="s-or"/>
+  <g id="sfRow"></g>
+  <text x="20" y="104" class="md" style="font-weight:650">subframeId <tspan class="mono sm mut">4 bits, 0–9, 1 ms each</tspan></text>
+  <text x="20" y="176" class="md" style="font-weight:650">slotId <tspan class="mono sm mut">6 bits, 0 … 2^μ − 1 within the subframe</tspan></text>
+  <text x="20" y="246" class="md" style="font-weight:650">symbolId <tspan class="mono sm mut">6 bits, 0–13 (normal CP)</tspan></text>
+  <g id="numDetail"></g>
+</svg>
+</div>
+<div class="scroll"><table>
+<thead><tr><th>μ</th><th>SCS</th><th>Slots / subframe</th><th>Slot length</th><th>Symbol incl. CP (avg.)</th><th>Symbols / s</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>15 kHz</td><td>1</td><td>1 ms</td><td>71.4 µs</td><td>14 000</td></tr>
+<tr><td>1</td><td>30 kHz</td><td>2</td><td>500 µs</td><td>35.7 µs</td><td>28 000</td></tr>
+<tr><td>2</td><td>60 kHz</td><td>4</td><td>250 µs</td><td>17.9 µs</td><td>56 000</td></tr>
+<tr><td>3</td><td>120 kHz</td><td>8</td><td>125 µs</td><td>8.9 µs</td><td>112 000</td></tr>
+</tbody></table></div>
+<p>The first symbol of each half-subframe (every 0.5 ms) has a longer cyclic prefix, so symbol boundaries are not uniformly spaced. An O-RU timing generator must count samples per symbol from a table, not divide time by 14.</p>
+</section>
+
+
+<section id="s-bw">
+<h2><span class="n">9</span>Fronthaul bandwidth</h2>
+<p class="sub">Compute the Ethernet line rate for one direction, including all headers, preamble and inter-frame gap, and compare it against a Split 8 (time-domain CPRI-style) link for the same carrier.</p>
+<div class="fig">
+  <div class="ctl">
+    <label>Carrier <select id="bwCar"></select></label>
+    <label>Spatial streams (eAxC) <input type="number" id="bwL" min="1" max="64" value="4"></label>
+    <label>Antennas, for the Split 8 comparison <input type="number" id="bwA" min="1" max="64" value="8"></label>
+    <label>Compression <select id="bwM">
+      <option value="bfp">BFP</option><option value="none">None</option><option value="mu">μ-law</option><option value="mod">Modulation comp.</option></select></label>
+    <label>IQ width <input type="number" id="bwW" min="1" max="16" value="9"></label>
+    <label>MTU (Ethernet payload) <select id="bwMtu"><option value="1500">1500</option><option value="9000" selected>9000 (jumbo)</option></select></label>
+  </div>
+  <div class="out" id="bwOut"></div>
+  <div id="bwBars" style="margin-top:14px"></div>
+</div>
+<p>C-plane traffic is usually a few percent of U-plane, but beamforming-weight extensions can make it much larger. Plan the SFP28 lanes on the RFSoC DFE for peak, not average, including the SRS and PRACH streams in the uplink.</p>
+</section>
+
+
+<section id="s-timing">
+<h2><span class="n">10</span>Delay management: the timing windows</h2>
+<p class="sub">O-RAN measures everything relative to the air interface at the O-RU antenna. The O-RU publishes a delay profile over the M-plane; the O-DU and the transport network must fit around it.</p>
+<div class="scroll"><table>
+<thead><tr><th>Parameter</th><th>Meaning</th><th>Owner</th></tr></thead>
+<tbody>
+<tr><td><code>T2a_min_up</code>, <code>T2a_max_up</code></td><td>Window, before air time, in which a DL U-plane packet must arrive at the O-RU</td><td>O-RU (delay profile)</td></tr>
+<tr><td><code>T2a_min_cp_dl</code>, <code>T2a_max_cp_dl</code></td><td>Same, for DL C-plane</td><td>O-RU</td></tr>
+<tr><td><code>Tcp_adv_dl</code></td><td>How far C-plane must lead the U-plane it describes</td><td>O-RU</td></tr>
+<tr><td><code>T2a_min_cp_ul</code>, <code>T2a_max_cp_ul</code></td><td>Window for UL C-plane arrival, before the UL symbol's air time</td><td>O-RU</td></tr>
+<tr><td><code>Ta3_min</code>, <code>Ta3_max</code></td><td>When the O-RU sends UL U-plane, after the symbol was received over the air</td><td>O-RU</td></tr>
+<tr><td><code>T12_min</code>, <code>T12_max</code>, <code>T34_min</code>, <code>T34_max</code></td><td>Transport delay DL and UL, including fibre and switches</td><td>Network</td></tr>
+<tr><td><code>T1a_min/max</code>, <code>Ta4_min/max</code></td><td>O-DU transmit window (DL) and receive window (UL)</td><td>O-DU (derived)</td></tr>
+</tbody></table></div>
+<div class="fig">
+  <div class="ctl">
+    <label>Fibre length (km): <span id="tFibV" style="display:inline">10</span><input type="range" id="tFib" min="0" max="30" step="0.5" value="10"></label>
+    <label>Switch delay variation (µs) <input type="number" id="tPdv" min="0" max="200" value="15"></label>
+    <label>T2a_min_up (µs) <input type="number" id="t2min" value="100"></label>
+    <label>T2a_max_up (µs) <input type="number" id="t2max" value="300"></label>
+    <label>Ta3_min (µs) <input type="number" id="t3min" value="50"></label>
+    <label>Ta3_max (µs) <input type="number" id="t3max" value="170"></label>
+  </div>
+  <div class="scroll"><svg id="tSvg" viewBox="0 0 960 300" role="img" aria-label="Downlink and uplink timing windows"></svg></div>
+  <div class="out" id="tOut" style="margin-top:12px"></div>
+  <p class="cap">Defaults are illustrative, not spec values. Fibre is taken as 5 µs/km; T12_min = fibre, T12_max = fibre + switch delay variation; T34 is assumed equal to T12.</p>
+</div>
+<p>The two inequalities behind the picture are the whole of delay management. Downlink: the O-DU must send at <code>T1a</code> such that <code>T2a_min ≤ T1a − T12 ≤ T2a_max</code> for every transport delay, which gives <code>T1a_min = T2a_min + T12_max</code> and <code>T1a_max = T2a_max + T12_min</code>. This only has a solution if the O-RU's receive window is wider than the transport's delay variation. Uplink: <code>Ta4_min = Ta3_min + T34_min</code> and <code>Ta4_max = Ta3_max + T34_max</code>.</p>
+<div class="note"><b>What this means for the RFSoC design.</b> <code>T2a_max_up − T2a_min_up</code> is set by how much DL symbol buffering you build. A wider window tolerates more network jitter but costs BRAM or URAM, since you must store every early symbol for every eAxC until its air time. <code>T2a_min_up</code> is your worst-case O-RU processing latency plus margin: iFFT, CP insertion, channel filter, CFR, DPD and the RF-DAC datapath (section 14).</div>
+</section>
+
+
+<section id="s-sync">
+<h2><span class="n">11</span>S-plane: synchronisation</h2>
+<p class="sub">No CPRI-style recovered line clock exists on a packet fronthaul. The O-RU must rebuild frequency, phase and time of day from PTP and SyncE, then derive every radio clock and frame boundary from them.</p>
+<h3>Lower-layer split synchronisation topologies</h3>
+<div class="grid4" id="llsGrid"></div>
+<h3>Accuracy targets at the antenna</h3>
+<div class="scroll"><table>
+<thead><tr><th>Requirement</th><th>Limit</th><th>Source</th></tr></thead>
+<tbody>
+<tr><td>TDD cell phase alignment</td><td>±1.5 µs to common reference (3 µs between cells)</td><td>3GPP TS 38.133; ITU-T G.8271</td></tr>
+<tr><td>Time alignment error, MIMO / Tx diversity, same carrier</td><td>65 ns between antenna connectors</td><td>3GPP TS 38.104 §6.5.3</td></tr>
+<tr><td>TAE, intra-band contiguous carrier aggregation</td><td>260 ns</td><td>3GPP TS 38.104</td></tr>
+<tr><td>TAE, intra-band non-contiguous and inter-band CA</td><td>3 µs</td><td>3GPP TS 38.104</td></tr>
+<tr><td>Frequency error at the air interface (wide-area BS)</td><td>±0.05 ppm</td><td>3GPP TS 38.104</td></tr>
+</tbody></table></div>
+<p>The 65 ns TAE applies inside a single O-RU: it is met with RFDC multi-tile synchronisation and matched analog paths, not with PTP. The ±1.5 µs limit is the network-wide PTP budget, of which the O-RU's own contribution (timestamp quantisation, servo noise, internal path delays) must be a small slice.</p>
+<h3>An illustrative ±1.5 µs budget</h3>
+<div class="fig">
+  <div class="bar" id="teBar" style="height:36px"></div>
+  <p class="cap">Illustrative allocation in the spirit of ITU-T G.8271.1; real budgets depend on hop count, boundary-clock class (G.8273.2 Class B: cTE ≤ 20 ns per hop, Class C: ≤ 10 ns) and link asymmetry.</p>
+</div>
+<h3>Deriving the radio frame from PTP time</h3>
+<p>O-RAN ties the radio frame to the GPS epoch (6 Jan 1980). The O-RU computes <code>frameId = ⌊(t_GPS − offset) / 10 ms⌋ mod 256</code>, where the offset is built from two M-plane parameters: α (a fine offset in units of 1/1.2288 ns) and β (a whole number of 10 ms frames). The 10 ms boundary becomes a hardware pulse that re-aligns the O-RAN interface timers, the Low-PHY symbol counter and the DUC/DDC NCO phase reset.</p>
+<p>PTP runs with the G.8275.1 telecom profile for full timing support: Layer 2 multicast (EtherType <code>0x88F7</code>, non-forwardable address <code>01-80-C2-00-00-0E</code>), 16 Sync and 16 Delay_Req per second, with SyncE providing the frequency. Hardware timestamps must be taken at the PCS so that the RS-FEC and gearbox latencies are either excluded or calibrated out.</p>
+</section>
+
+
+<section id="s-dfe">
+<h2><span class="n">12</span>The O-RU on a Zynq RFSoC DFE</h2>
+<p class="sub">The ZU67DR is AMD's 8T8R, 400 MHz iBW single-chip O-RU device: RF data converters, hardened DFE blocks, programmable logic and an Arm processing system on one die.</p>
+<div class="fig scroll">
+<svg viewBox="0 0 1000 600" role="img" aria-label="Block diagram of an O-RAN 7.2x O-RU on the RFSoC DFE">
+  <defs>
+    <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="fill-m"/></marker>
+    <marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="fill-t"/></marker>
+  </defs>
+  
+  <rect x="96" y="30" width="330" height="420" rx="8" class="s-soft2" style="opacity:.6"/>
+  <text x="108" y="50" class="sm mut">Programmable logic (soft IP)</text>
+  <rect x="436" y="30" width="360" height="420" rx="8" class="s-soft2" style="opacity:.35"/>
+  <text x="448" y="50" class="sm mut">Hardened DFE IP (bypassable)</text>
+  
+  <rect x="14" y="120" width="70" height="210" rx="6" class="s-eth"/>
+  <text x="49" y="210" class="md" text-anchor="middle" style="font-weight:650">SFP28</text>
+  <text x="49" y="228" class="sm" text-anchor="middle">10/25G</text>
+  <text x="49" y="244" class="sm" text-anchor="middle">to O-DU</text>
+  
+  <rect x="108" y="120" width="96" height="210" rx="6" class="s-hard"/>
+  <text x="156" y="196" class="sm" text-anchor="middle" style="font-weight:650">25G MAC</text>
+  <text x="156" y="212" class="sm" text-anchor="middle">PCS, RS-FEC</text>
+  <text x="156" y="236" class="sm" text-anchor="middle">1588 HW</text>
+  <text x="156" y="252" class="sm" text-anchor="middle">timestamps</text>
+  
+  <rect x="216" y="70" width="200" height="120" rx="6" class="s-soft"/>
+  <text x="226" y="90" class="sm" style="font-weight:650">O-RAN Radio Interface</text>
+  <text x="226" y="107" class="sm">filter: eCPRI / VLAN / UDP</text>
+  <text x="226" y="123" class="sm">C-plane parser, section DB</text>
+  <text x="226" y="139" class="sm">U-plane → symbol buffers</text>
+  <text x="226" y="155" class="sm">window counters (early/late)</text>
+  <text x="226" y="171" class="sm">DL: decompress, beam ID</text>
+  <rect x="216" y="200" width="200" height="60" rx="6" class="s-soft"/>
+  <text x="226" y="220" class="sm" style="font-weight:650">Beamforming / precoding</text>
+  <text x="226" y="236" class="sm">weights from beamId or ext 1/11</text>
+  <text x="226" y="251" class="sm">(DL and UL, per PRB)</text>
+  <rect x="216" y="270" width="200" height="60" rx="6" class="s-soft"/>
+  <text x="226" y="290" class="sm" style="font-weight:650">UL: PRB select, compress</text>
+  <text x="226" y="306" class="sm">packetise by C-plane request</text>
+  <text x="226" y="321" class="sm">send inside Ta3 window</text>
+  
+  <rect x="448" y="70" width="80" height="60" rx="6" class="s-hard"/><text x="488" y="96" class="sm" text-anchor="middle">iFFT</text><text x="488" y="112" class="sm" text-anchor="middle">4096</text>
+  <rect x="536" y="70" width="80" height="60" rx="6" class="s-soft"/><text x="576" y="96" class="sm" text-anchor="middle">CP insert</text><text x="576" y="112" class="sm" text-anchor="middle">window</text>
+  <rect x="624" y="70" width="80" height="60" rx="6" class="s-hard"/><text x="664" y="92" class="sm" text-anchor="middle">channel</text><text x="664" y="106" class="sm" text-anchor="middle">filter, DUC</text><text x="664" y="120" class="sm" text-anchor="middle">+ mixer</text>
+  <rect x="712" y="70" width="74" height="60" rx="6" class="s-hard"/><text x="749" y="104" class="sm" text-anchor="middle">CFR</text>
+  <rect x="712" y="140" width="74" height="50" rx="6" class="s-hard"/><text x="749" y="170" class="sm" text-anchor="middle">DPD</text>
+  
+  <rect x="448" y="270" width="80" height="60" rx="6" class="s-hard"/><text x="488" y="296" class="sm" text-anchor="middle">FFT</text><text x="488" y="312" class="sm" text-anchor="middle">4096</text>
+  <rect x="536" y="270" width="80" height="60" rx="6" class="s-soft"/><text x="576" y="296" class="sm" text-anchor="middle">CP remove</text><text x="576" y="312" class="sm" text-anchor="middle">sym. timing</text>
+  <rect x="624" y="270" width="80" height="60" rx="6" class="s-hard"/><text x="664" y="292" class="sm" text-anchor="middle">DDC, mixer</text><text x="664" y="306" class="sm" text-anchor="middle">channel</text><text x="664" y="320" class="sm" text-anchor="middle">filter</text>
+  <rect x="712" y="270" width="74" height="60" rx="6" class="s-hard"/><text x="749" y="296" class="sm" text-anchor="middle">complex</text><text x="749" y="312" class="sm" text-anchor="middle">equaliser</text>
+  <rect x="536" y="350" width="168" height="50" rx="6" class="s-hard"/><text x="620" y="372" class="sm" text-anchor="middle">PRACH: mix, decimate,</text><text x="620" y="388" class="sm" text-anchor="middle">FT PRACH (FFT)</text>
+  
+  <rect x="806" y="60" width="92" height="140" rx="6" class="s-soft2"/>
+  <text x="852" y="104" class="sm" text-anchor="middle" style="font-weight:650">8× RF-DAC</text><text x="852" y="120" class="sm" text-anchor="middle">up to 10 GS/s</text><text x="852" y="136" class="sm" text-anchor="middle">interp., NCO</text>
+  <rect x="806" y="250" width="92" height="90" rx="6" class="s-soft2"/>
+  <text x="852" y="284" class="sm" text-anchor="middle" style="font-weight:650">8× RF-ADC</text><text x="852" y="300" class="sm" text-anchor="middle">2.95 GS/s</text><text x="852" y="316" class="sm" text-anchor="middle">decim., NCO</text>
+  <rect x="806" y="350" width="92" height="60" rx="6" class="s-soft2"/>
+  <text x="852" y="374" class="sm" text-anchor="middle" style="font-weight:650">2× obs. ADC</text><text x="852" y="390" class="sm" text-anchor="middle">5.9 GS/s</text>
+  
+  <rect x="912" y="60" width="76" height="350" rx="6" class="s-plain"/>
+  <text x="950" y="200" class="sm" text-anchor="middle">PA, LNA,</text><text x="950" y="216" class="sm" text-anchor="middle">filters,</text><text x="950" y="232" class="sm" text-anchor="middle">duplexer /</text><text x="950" y="248" class="sm" text-anchor="middle">TDD switch</text>
+  
+  <path d="M84 150H108M204 130H216M416 100H448M528 100H536M616 100H624M704 100H712M749 130V140M786 165H806M898 130H912" class="ln" marker-end="url(#a2)"/>
+  
+  <path d="M912 295H898M806 300H786M712 300H704M624 300H616M536 300H528M448 300H416M216 300H204M108 300H84" class="ln" marker-end="url(#a2)"/>
+  <path d="M664 330V350" class="ln" marker-end="url(#a2)"/><path d="M536 375H400V330" class="ln" marker-end="url(#a2)"/>
+  
+  <path d="M950 410V430H852V410M806 380H790V190" class="ln-t dash" marker-end="url(#a3)"/>
+  <text x="988" y="458" class="sm" text-anchor="end" style="fill:var(--tim)">PA feedback → DPD adaptation</text>
+  
+  
+  <rect x="96" y="470" width="700" height="112" rx="8" class="s-ps"/>
+  <text x="110" y="492" class="md" style="font-weight:650">Processing system (4× Cortex-A53 + 2× Cortex-R5)</text>
+  <text x="110" y="514" class="sm">M-plane: NETCONF/YANG, delay profile, eAxC map, carrier config</text>
+  <text x="110" y="532" class="sm">S-plane: ptp4l servo from PCS timestamps, steers DPLL (phase and frequency)</text>
+  <text x="110" y="550" class="sm">DFE drivers: RFDC, mixer NCOs, channel filter coefficients, CFR thresholds, DPD coefficient updates</text>
+  <text x="110" y="568" class="sm">Low-priority traffic via DMA from the O-RAN IF packet filter</text>
+  <path d="M156 330V470M316 330V470M616 450V470" class="ln-p"/>
+  <text x="20" y="420" class="sm" style="font-weight:650">Key</text>
+  <rect x="20" y="430" width="14" height="10" class="s-hard"/><text x="40" y="440" class="sm">hard IP</text>
+  <rect x="20" y="446" width="14" height="10" class="s-soft"/><text x="40" y="456" class="sm">soft IP</text>
+</svg>
+</div>
+<p class="cap">Block assignment follows the book's DFE architecture figure and AMD's product material. Whether the FFT and CP stages are hard or soft depends on the DFE IP configuration you choose; any hardened block can be bypassed and replaced in PL.</p>
+<h3>DFE building blocks and their documents</h3>
+<div class="scroll"><table>
+<thead><tr><th>Block</th><th>Kind</th><th>Role in the 7.2x O-RU</th><th>Document</th></tr></thead>
+<tbody>
+<tr><td>RF Data Converter (Gen 3/DFE)</td><td><span class="tag t-hard">hard</span></td><td>8 Tx at up to 10 GS/s, 8 Rx at 2.95 GS/s plus 2 feedback ADCs at 5.9 GS/s; direct RF to 7.125 GHz; MTS</td><td>PG269</td></tr>
+<tr><td>DUC-DDC Mixer</td><td><span class="tag t-hard">hard</span></td><td>Per-carrier NCO placement and rate change, up to 8 antennas</td><td>PG393</td></tr>
+<tr><td>Channel Filter</td><td><span class="tag t-hard">hard</span></td><td>Per-carrier NR/LTE channel filtering</td><td>PG395</td></tr>
+<tr><td>Equalizer</td><td><span class="tag t-hard">hard</span></td><td>Complex equalisation of Rx (and Tx) paths</td><td>PG394</td></tr>
+<tr><td>PRACH</td><td><span class="tag t-hard">hard</span></td><td>PRACH channel extraction and decimation per RACH occasion</td><td>PG391</td></tr>
+<tr><td>FT PRACH</td><td><span class="tag t-hard">hard</span></td><td>FFT with buffering, bit reversal and preamble extraction for PRACH</td><td>PG429</td></tr>
+<tr><td>CFR, DPD</td><td><span class="tag t-hard">hard</span></td><td>PAPR reduction and PA linearisation, coefficient updates from the PS</td><td>AMD DFE documentation</td></tr>
+<tr><td>O-RAN Radio Interface</td><td><span class="tag t-soft">soft</span></td><td>O-RU-only C/U-plane handling, up to four 10G or 25G ports, 8 CCs, 16 spatial streams, 2048 flow IDs, one PRACH port</td><td>PB063 / PG370</td></tr>
+<tr><td>10G/25G Ethernet</td><td><span class="tag t-hard">hard</span> + <span class="tag t-soft">soft</span></td><td>MAC, PCS, RS-FEC and 1588 timestamping</td><td>PG210</td></tr>
+</tbody></table></div>
+<h3>Data path rates, 100 MHz NR carrier at 30 kHz</h3>
+<div class="scroll"><table>
+<thead><tr><th>Point</th><th>Rate</th><th>Form</th></tr></thead>
+<tbody>
+<tr><td>Fronthaul, per eAxC</td><td>28 000 symbols/s × 273 PRBs</td><td>Frequency-domain, compressed (e.g. 9-bit BFP)</td></tr>
+<tr><td>After iFFT + CP</td><td>122.88 MS/s</td><td>Time-domain baseband, 16-bit I/Q, 4096-point FFT</td></tr>
+<tr><td>After DUC (per antenna)</td><td>e.g. 491.52 or 983.04 MS/s</td><td>Multi-carrier composite for CFR and DPD (DPD needs ~3–5× iBW)</td></tr>
+<tr><td>RF-DAC</td><td>e.g. 7864.32 MS/s = 64 × 122.88</td><td>Interpolated inside the tile, NCO to RF</td></tr>
+<tr><td>RF-ADC</td><td>e.g. 2949.12 MS/s = 24 × 122.88</td><td>Direct RF sampling in a higher Nyquist zone for mid-band</td></tr>
+</tbody></table></div>
+</section>
+
+
+<section id="s-clock">
+<h2><span class="n">13</span>Clocking on the RFSoC DFE</h2>
+<p class="sub">One disciplined reference feeds everything: the RF converters, the PL, the Ethernet transceivers and the 10 ms frame pulse. Anything not derived from it becomes a clock-domain crossing that has to be designed, not hoped for.</p>
+<div class="fig scroll">
+<svg viewBox="0 0 1000 470" role="img" aria-label="Clock tree from PTP and SyncE to RF converters and PL">
+  <defs><marker id="a4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" class="fill-t"/></marker></defs>
+  <rect x="16" y="40" width="160" height="62" rx="6" class="s-eth"/><text x="26" y="62" class="sm" style="font-weight:650">SFP28 Rx (GTY)</text><text x="26" y="78" class="sm">recovered clock</text><text x="26" y="93" class="sm">SyncE frequency</text>
+  <rect x="16" y="130" width="160" height="78" rx="6" class="s-ps"/><text x="26" y="152" class="sm" style="font-weight:650">PTP servo (A53)</text><text x="26" y="168" class="sm">ptp4l, PCS stamps</text><text x="26" y="184" class="sm">phase / freq steering</text><text x="26" y="199" class="sm">over SPI/I²C</text>
+  <rect x="220" y="70" width="170" height="110" rx="6" class="s-tim"/><text x="230" y="92" class="sm" style="font-weight:650">Network DPLL</text><text x="230" y="108" class="sm">SyncE + PTP combining</text><text x="230" y="124" class="sm">holdover (OCXO)</text><text x="230" y="140" class="sm">e.g. LMK05318,</text><text x="230" y="156" class="sm">Renesas 8A34xxx</text>
+  <rect x="430" y="70" width="170" height="110" rx="6" class="s-tim"/><text x="440" y="92" class="sm" style="font-weight:650">Jitter cleaner</text><text x="440" y="108" class="sm">+ SYSREF generator</text><text x="440" y="124" class="sm">e.g. LMK04828</text><text x="440" y="140" class="sm">(as on the CLK104 card)</text><text x="440" y="156" class="sm">122.88 MHz family</text>
+  <rect x="660" y="20" width="150" height="56" rx="6" class="s-tim"/><text x="670" y="42" class="sm" style="font-weight:650">LMX2594 (DAC)</text><text x="670" y="60" class="sm">7864.32 MHz</text>
+  <rect x="660" y="90" width="150" height="56" rx="6" class="s-tim"/><text x="670" y="112" class="sm" style="font-weight:650">LMX2594 (ADC)</text><text x="670" y="130" class="sm">2949.12 MHz</text>
+  <rect x="850" y="20" width="136" height="126" rx="6" class="s-soft2"/><text x="860" y="44" class="sm" style="font-weight:650">RFDC tiles</text><text x="860" y="62" class="sm">sample clocks</text><text x="860" y="80" class="sm">(or tile PLL from</text><text x="860" y="96" class="sm">low-freq ref,</text><text x="860" y="112" class="sm">distributed across</text><text x="860" y="128" class="sm">tiles on Gen 3/DFE)</text>
+  <rect x="660" y="170" width="150" height="56" rx="6" class="s-tim"/><text x="670" y="192" class="sm" style="font-weight:650">SYSREF (analog)</text><text x="670" y="210" class="sm">e.g. 7.68 MHz</text>
+  <rect x="660" y="240" width="150" height="56" rx="6" class="s-tim"/><text x="670" y="262" class="sm" style="font-weight:650">PL refclk + PL SYSREF</text><text x="670" y="280" class="sm">245.76 MHz, 7.68 MHz</text>
+  <rect x="850" y="170" width="136" height="126" rx="6" class="s-soft"/><text x="860" y="194" class="sm" style="font-weight:650">MTS</text><text x="860" y="212" class="sm">SYSREF captured in</text><text x="860" y="228" class="sm">every tile and in PL;</text><text x="860" y="244" class="sm">aligns FIFO read</text><text x="860" y="260" class="sm">pointers → fixed</text><text x="860" y="276" class="sm">latency, 65 ns TAE</text>
+  <rect x="430" y="240" width="170" height="110" rx="6" class="s-soft"/><text x="440" y="262" class="sm" style="font-weight:650">PL MMCMs</text><text x="440" y="280" class="sm">491.52 Low-PHY / DFE</text><text x="440" y="296" class="sm">245.76, 122.88 MHz</text><text x="440" y="312" class="sm">RFDC AXIS clocks</text><text x="440" y="328" class="sm">phase-locked to SYSREF</text>
+  <rect x="220" y="240" width="170" height="110" rx="6" class="s-eth"/><text x="230" y="262" class="sm" style="font-weight:650">GTY refclk</text><text x="230" y="280" class="sm">156.25 MHz, from DPLL</text><text x="230" y="296" class="sm">so Tx is SyncE-locked</text><text x="230" y="312" class="sm">25G: 390.625 MHz</text><text x="230" y="328" class="sm">user clock</text>
+  <rect x="16" y="380" width="374" height="70" rx="6" class="s-or"/><text x="26" y="402" class="sm" style="font-weight:650">ToD counter → 1PPS and 10 ms frame pulse</text><text x="26" y="420" class="sm">frameId from GPS time, α/β offsets</text><text x="26" y="436" class="sm">re-aligns O-RAN IF timers, symbol counter, NCO reset</text>
+  <rect x="430" y="380" width="556" height="70" rx="6" class="s-soft2"/><text x="440" y="402" class="sm" style="font-weight:650">Rule of thumb for integer relationships</text><text x="440" y="420" class="sm">SYSREF must divide every clock it qualifies: DAC/ADC sample, AXIS fabric, PL SYSREF.</text><text x="440" y="436" class="sm">7.68 MHz = 122.88 / 16 works for the whole 122.88 MHz × 2ⁿ family.</text>
+  <path d="M176 70H200V100H220" class="ln-t" marker-end="url(#a4)"/><path d="M176 170H200V150H220" class="ln-t" marker-end="url(#a4)"/><path d="M390 125H430" class="ln-t" marker-end="url(#a4)"/><path d="M600 90H630V48H660" class="ln-t" marker-end="url(#a4)"/><path d="M600 118H660" class="ln-t" marker-end="url(#a4)"/><path d="M810 48H850" class="ln-t" marker-end="url(#a4)"/><path d="M810 118H850" class="ln-t" marker-end="url(#a4)"/><path d="M600 150H630V198H660" class="ln-t" marker-end="url(#a4)"/><path d="M630 198V268H660" class="ln-t" marker-end="url(#a4)"/><path d="M810 198H850" class="ln-t" marker-end="url(#a4)"/><path d="M810 268H850" class="ln-t" marker-end="url(#a4)"/><path d="M515 180V240" class="ln-t" marker-end="url(#a4)"/><path d="M305 180V240" class="ln-t" marker-end="url(#a4)"/>
+  <path d="M130 208V380" class="ln-p"/>
+  
+</svg>
+</div>
+<p class="cap">Device names are examples of commonly used parts; the book's CLK104 add-on card (ZCU208/ZCU216) uses the LMK04828 + LMX2594 pairing shown here. Check your board's schematic for the actual parts. Frequencies assume an n78-style plan with a 122.88 MHz base.</p>
+<h3>Clock domains and where they meet</h3>
+<div class="scroll"><table>
+<thead><tr><th>Domain</th><th>Typical clock</th><th>Locked to radio?</th><th>Crossing</th></tr></thead>
+<tbody>
+<tr><td>Ethernet Rx</td><td>390.625 MHz (25G, 64-bit)</td><td>Only in frequency, if the O-DU side is SyncE-locked</td><td>Into O-RAN IF: async FIFO, then symbol buffer</td></tr>
+<tr><td>O-RAN IF core</td><td>~400 MHz class</td><td>Timers follow ToD, clock usually not</td><td>Symbol double buffers absorb the Ethernet ↔ radio crossing</td></tr>
+<tr><td>Low-PHY / DFE</td><td>491.52 or 245.76 MHz</td><td>Yes (MMCM from PL refclk)</td><td>Synchronous to RFDC via MTS</td></tr>
+<tr><td>RFDC AXI4-Stream</td><td>Sample rate ÷ samples per cycle</td><td>Yes</td><td>Tile FIFOs, aligned by SYSREF</td></tr>
+<tr><td>ToD / PTP timer</td><td>Timer clock + phase steering</td><td>Defines radio time</td><td>Frame pulse and timestamps resynchronised into each domain</td></tr>
+<tr><td>PS (AXI-Lite control)</td><td>100–250 MHz</td><td>No</td><td>Register CDC; never in the real-time path</td></tr>
+</tbody></table></div>
+<h3>Frequency planning checks</h3>
+<p>Direct RF sampling puts harmonics, interleaving spurs and NCO images in places a superheterodyne radio never sees. For each band, check the RF-DAC image at <code>fs − f_RF</code>, the RF-ADC Nyquist zone and its alias of the Tx band in FDD, and interleaving spurs at <code>fs/2 ± f</code> and <code>fs/4 ± f</code> against the receive band. Chapter 12 and Appendix F of the RFSoC book walk through this with worked frequency plans; keep every converter rate an integer multiple of 122.88 MHz so the frame timing stays exact.</p>
+</section>
+
+
+<section id="s-latency">
+<h2><span class="n">14</span>O-RU latency and buffering</h2>
+<p class="sub">Where the O-RU's DL and UL delay goes. This sets <code>T2a_min_up</code> and <code>Ta3_min</code> in your published delay profile.</p>
+<div class="fig">
+  <h3 style="margin-top:0">Downlink, packet arrival to antenna</h3>
+  <div id="latDL"></div>
+  <h3>Uplink, antenna to packet departure</h3>
+  <div id="latUL"></div>
+  <p class="cap">Illustrative order-of-magnitude values for a 100 MHz, 30 kHz carrier; measure on your build (ILA timestamps against the ToD counter). The FFT stages cost about one symbol each because a whole symbol must be collected before the transform can finish.</p>
+</div>
+<div class="note"><b>Buffer sizing.</b> DL symbol buffer per eAxC ≈ window depth in symbols × PRBs × 48 B (decompressed 16-bit). With a 300 µs window at 30 kHz (≈ 9 symbols), 273 PRBs and 8 eAxC that is about 9 × 273 × 48 × 8 ≈ 0.94 MB, more than the ZU67DR's block RAM alone would comfortably hold alongside everything else, so store compressed and decompress on read, or use URAM.</div>
+</section>
+
+
+<section id="s-pitfalls">
+<h2><span class="n">15</span>Bring-up checklist</h2>
+<div class="scroll"><table>
+<thead><tr><th>Area</th><th>Check</th><th>Symptom if wrong</th></tr></thead>
+<tbody>
+<tr><td><span class="tag t-ec">eCPRI</span></td><td>eAxC field widths identical on O-DU and O-RU</td><td>Packets dropped as unknown flows, or routed to wrong antenna</td></tr>
+<tr><td><span class="tag t-or">C/U</span></td><td>Static vs dynamic udCompHdr, udIqWidth, udCompMeth match</td><td>IQ garbage after the first PRB; EVM near 0 dB</td></tr>
+<tr><td><span class="tag t-or">C/U</span></td><td><code>numPrb = 0</code> handled as "all"; startPrb offsets for carriers &gt; 255 PRBs</td><td>Missing upper band</td></tr>
+<tr><td><span class="tag t-eth">Ethernet</span></td><td>Jumbo frames through every switch, or sections sized to the MTU</td><td>Silent drops of full-carrier symbols</td></tr>
+<tr><td><span class="tag t-eth">Ethernet</span></td><td>VLAN PCP: C/U high priority; M-plane and PTP separated</td><td>Late packets under load</td></tr>
+<tr><td><span class="tag t-tim">Timing</span></td><td>Read O-RAN IF early / on-time / late counters per eAxC</td><td>Intermittent EVM or BLER, no obvious error</td></tr>
+<tr><td><span class="tag t-tim">Timing</span></td><td>Published T2a/Ta3 match the measured internal latency plus margin</td><td>Every symbol late at long fibre, or buffer overflow at short</td></tr>
+<tr><td><span class="tag t-tim">Sync</span></td><td>PTP timestamp point calibrated (PCS vs MAC, RS-FEC latency)</td><td>Constant time offset of hundreds of ns</td></tr>
+<tr><td><span class="tag t-tim">Sync</span></td><td>α/β frame offsets; 10 ms pulse aligned to the ToD rollover</td><td>frameId off by one; UE cannot attach</td></tr>
+<tr><td><span class="tag t-hard">RFDC</span></td><td>MTS latency identical across power cycles; SYSREF divides all clocks</td><td>Beam pointing and MIMO TAE drift after reboot</td></tr>
+<tr><td><span class="tag t-hard">RFDC</span></td><td>NCO phase reset tied to frame boundary</td><td>Random carrier phase per boot; beamforming calibration lost</td></tr>
+<tr><td><span class="tag t-hard">DFE</span></td><td>DPD observation-path delay aligned; TDD gating of CFR/DPD</td><td>DPD divergence; ACLR degrades at slot edges</td></tr>
+<tr><td><span class="tag t-pl">Gain</span></td><td>Digital power scaling (fs-offset) and BFP exponent handling</td><td>Clipping in CFR or weak output</td></tr>
+</tbody></table></div>
+</section>
+
+
+<section id="s-refs">
+<h2><span class="n">16</span>Sources</h2>
+<ol class="refs">
+<li>O-RAN Alliance WG4, Control, User and Synchronization Plane Specification (O-RAN.WG4.CUS). Field layouts, section types, delay management, LLS-C1–C4.</li>
+<li>eCPRI Specification v2.0 (2019). <a href="https://www.cpri.info/downloads/eCPRI_v_2.0_2019_05_10c.pdf">cpri.info</a></li>
+<li>AMD, O-RAN Radio Interface LogiCORE IP Product Brief (PB063). <a href="https://docs.amd.com/api/khub/documents/zeqCjAMODR7uZ5ioT_21YQ/content">docs.amd.com</a></li>
+<li>AMD, Zynq RFSoC DFE ZCU670 Evaluation Kit product brief. <a href="https://www.amd.com/content/dam/amd/en/documents/products/adaptive-socs-and-fpgas/boards-kits/product-briefs/zcu670-product-brief.pdf">amd.com</a></li>
+<li>AMD, Zynq UltraScale+ RFSoC DFE product page. <a href="https://www.amd.com/en/products/adaptive-socs-and-fpgas/soc/zynq-ultrascale-plus-rfsoc/zynq-ultrascale-plus-rfsoc-dfe.html">amd.com</a></li>
+<li>AMD product guides: PG269 RF Data Converter, PG391 DFE PRACH, PG393 DUC-DDC Mixer, PG394 Equalizer, PG395 Channel Filter, PG429 FT PRACH. <a href="https://docs.amd.com/r/en-US/pg269-rf-data-converter">docs.amd.com</a></li>
+<li>Crockett, Northcote, Goldsmith, Stewart et al., <i>Software Defined Radio with Zynq UltraScale+ RFSoC</i> (2023): §3.3.6 DFE architecture, §3.4 CLK104 clocking, §13.6 clocks and sample rates, Ch. 17 RFSoC in cellular networks. <a href="https://www.rfsocbook.com">rfsocbook.com</a></li>
+<li>ITU-T G.8275.1 (PTP telecom profile, full timing support), G.8271.1 (network time error limits), G.8273.2 (boundary clock classes), G.8262 / G.8262.1 (SyncE clocks).</li>
+<li>3GPP TS 38.104 (BS radio requirements: TAE, frequency error), TS 38.211 (numerology), TS 38.133 (cell phase synchronisation).</li>
+</ol>
+</section>
+<div class="fh-foot">Built as an engineering reference. Numbers marked illustrative are for orientation; confirm against the spec version and IP release you build with.</div>
+</div>
+</div>
+<script>
+(function(){
+const $=s=>document.querySelector(s);
+const NS="http://www.w3.org/2000/svg";
+function el(tag,attrs,parent,text){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(text!=null)e.textContent=text;if(parent)parent.appendChild(e);return e;}
+
+
+/* theme */
+const ROOT=document.getElementById('fh-root');
+try{const t=localStorage.getItem('fh-theme');if(t)ROOT.setAttribute('data-theme',t);}catch(e){}
+$('#themeBtn').addEventListener('click',()=>{
+  const cur=ROOT.getAttribute('data-theme');
+  const dark=cur?cur==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
+  const nt=dark?'light':'dark';ROOT.setAttribute('data-theme',nt);
+  try{localStorage.setItem('fh-theme',nt);}catch(e){}
+  redrawAll();
+});
+
+/* TOC */
+const secs=[...document.querySelectorAll('#fh-root section')];
+const tl=$('#tocList'),ml=$('#mtocList');
+secs.forEach(s=>{const h=s.querySelector('h2');const t=h.childNodes[1].textContent;
+  const li=document.createElement('li');li.innerHTML=`<a href="#${s.id}">${t}</a>`;tl.appendChild(li);
+  const li2=document.createElement('li');li2.innerHTML=`<a href="#${s.id}">${t}</a>`;ml.appendChild(li2);});
+const links=[...tl.querySelectorAll('a')];
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id));}})},{rootMargin:'-20% 0px -70% 0px'});
+secs.forEach(s=>io.observe(s));
+
+/* ---------- bit field specs ---------- */
+const F=(n,b,c,d,v)=>({n,b,c,d,v});
+const specs={
+ eth:{label:"Ethernet + VLAN",rows:[
+  F("Destination MAC",48,"eth","O-RU MAC address (DL) or O-DU MAC (UL). Programmable filter rules in the O-RAN IF match on it."),
+  F("Source MAC",48,"eth","Sender MAC."),
+  F("TPID",16,"eth","0x8100: IEEE 802.1Q VLAN tag follows.","0x8100"),
+  F("PCP",3,"eth","Priority Code Point. C-plane and U-plane get the highest classes; M-plane and best effort lower. PTP usually has its own high class."),
+  F("DEI",1,"eth","Drop eligible indicator. Keep 0 for fronthaul."),
+  F("VLAN ID",12,"eth","Separates C/U, M and S traffic or carriers per operator. Configured over the M-plane."),
+  F("EtherType",16,"eth","0xAEFE = eCPRI directly over Ethernet. With UDP/IP transport this is 0x0800 or 0x86DD and the eCPRI header follows a UDP header.","0xAEFE")]},
+ ecpri:{label:"eCPRI header",rows:[
+  F("Revision",4,"ec","ecpriVersion = 1 (0001b) for eCPRI 1.x/2.0 as used by O-RAN.","1"),
+  F("Res",3,"rs","Reserved, 0."),
+  F("C",1,"ec","Concatenation indicator. O-RAN uses 0: one eCPRI message per Ethernet frame."),
+  F("Message type",8,"ec","0 = IQ data (U-plane), 2 = real-time control (C-plane), 5 = one-way delay measurement."),
+  F("Payload size",16,"ec","Bytes following the 4-byte common header, i.e. transport header + O-RAN payload. Must agree with the Ethernet length after padding is removed."),
+  F("DU_Port_ID",4,"ec","eAxC sub-field (width set via M-plane). Distinguishes O-DU processing units or ports."),
+  F("BandSector_ID",4,"ec","eAxC sub-field. Band or sector served."),
+  F("CC_ID",4,"ec","eAxC sub-field. Component carrier."),
+  F("RU_Port_ID",4,"ec","eAxC sub-field. Spatial stream / antenna port / PRACH or SRS stream in the O-RU."),
+  F("Sequence ID",8,"ec","Incremented per eAxC and plane; used to detect loss and reordering."),
+  F("E",1,"ec","Last-subsequence bit. 1 on every O-RAN packet (no eCPRI-level fragmentation)."),
+  F("Subsequence ID",7,"ec","0 in O-RAN.")]},
+ uplane:{label:"U-plane",rows:[
+  F("dataDirection",1,"or","1 = DL (gNB Tx), 0 = UL (gNB Rx)."),
+  F("payloadVersion",3,"or","001b for this generation of the spec.","1"),
+  F("filterIndex",4,"or","0 for standard channels; non-zero selects PRACH / mixed-numerology filters defined by C-plane type 3."),
+  F("frameId",8,"or","Radio frame number mod 256, from GPS-referenced time."),
+  F("subframeId",4,"or","0–9 within the frame."),
+  F("slotId",6,"or","Slot within the subframe: 0…2^μ−1."),
+  F("symbolId",6,"or","OFDM symbol within the slot, 0–13."),
+  F("sectionId",12,"or","Links this U-plane section to the C-plane section that scheduled it."),
+  F("rb",1,"or","0 = every RB, 1 = every other RB."),
+  F("symInc",1,"or","Symbol number increment command (rarely 1)."),
+  F("startPrbu",10,"or","First PRB of this section."),
+  F("numPrbu",8,"or","PRBs in this section; 0 means all PRBs of the carrier."),
+  F("udIqWidth",4,"or","Present only with dynamic compression config. Mantissa width; 0 = 16.","dynamic only"),
+  F("udCompMeth",4,"or","Present only with dynamic config. 0 none, 1 BFP, 2 block scaling, 3 μ-law, 4 modulation compression.","dynamic only"),
+  F("reserved",8,"rs","Pads udCompHdr to 16 bits (dynamic config only).","dynamic only"),
+  F("res",4,"rs","PRB 0 udCompParam upper nibble, reserved for BFP."),
+  F("exponent",4,"pl","BFP shared exponent for this PRB: each mantissa is shifted left by this amount to rebuild 16-bit values."),
+  F("I0",9,"pl","RE 0 in-phase mantissa (9-bit BFP example)."),
+  F("Q0",9,"pl","RE 0 quadrature mantissa."),
+  F("I1",9,"pl","RE 1 in-phase."),
+  F("Q1",9,"pl","RE 1 quadrature."),
+  F("I2 … Q11",180,"pl","Remaining 10 REs: 20 × 9 bits. Next PRB starts on the byte boundary right after (28 bytes per PRB).")]},
+ c1:{label:"C-plane type 1",rows:[
+  F("dataDirection",1,"or","Direction of the U-plane this message controls."),
+  F("payloadVersion",3,"or","001b.","1"),
+  F("filterIndex",4,"or","0 for type 1."),
+  F("frameId",8,"or","Frame of the first controlled symbol."),
+  F("subframeId",4,"or","0–9."),
+  F("slotId",6,"or","Slot in subframe."),
+  F("startSymbolId",6,"or","First symbol the sections apply to."),
+  F("numberOfSections",8,"or","Section descriptors in this message."),
+  F("sectionType",8,"or","1.","1"),
+  F("udCompHdr",8,"or","udIqWidth + udCompMeth for the U-plane these sections schedule."),
+  F("reserved",8,"rs","0."),
+  F("sectionId",12,"or","Referenced by the matching U-plane sections."),
+  F("rb",1,"or","Every RB or every other RB."),
+  F("symInc",1,"or","Increment the symbol for this section."),
+  F("startPrbc",10,"or","First PRB."),
+  F("numPrbc",8,"or","PRB count; 0 = all."),
+  F("reMask",12,"or","Which of the 12 REs in each PRB this section covers (lets two beams share a PRB)."),
+  F("numSymbol",4,"or","Consecutive symbols with identical allocation."),
+  F("ef",1,"or","1 = a section extension follows."),
+  F("beamId",15,"or","Beam to apply; 0 = no beamforming. With ext 1 the weights travel in the message.")]},
+ c3:{label:"C-plane type 3",rows:[
+  F("dataDirection",1,"or","Usually 0 (UL) for PRACH."),
+  F("payloadVersion",3,"or","001b.","1"),
+  F("filterIndex",4,"or","Selects the PRACH filter (format dependent)."),
+  F("frameId",8,"or","Frame."),
+  F("subframeId",4,"or","Subframe."),
+  F("slotId",6,"or","Slot."),
+  F("startSymbolId",6,"or","Start symbol of the PRACH occasion."),
+  F("numberOfSections",8,"or","Sections in message."),
+  F("sectionType",8,"or","3.","3"),
+  F("timeOffset",16,"or","Samples from the slot start to the start of the PRACH CP, in units of the PRACH sample rate."),
+  F("FFT size",4,"or","frameStructure[7:4]: log2 of PRACH FFT size."),
+  F("μ / SCS",4,"or","frameStructure[3:0]: PRACH subcarrier spacing code (e.g. 1.25, 5, 15, 30 kHz …)."),
+  F("cpLength",16,"or","PRACH cyclic-prefix length in samples."),
+  F("udCompHdr",8,"or","Compression of the PRACH U-plane."),
+  F("sectionId",12,"or","Section id."),
+  F("rb",1,"or","RB spacing."),
+  F("symInc",1,"or","Symbol increment."),
+  F("startPrbc",10,"or","Start PRB in the PRACH grid."),
+  F("numPrbc",8,"or","PRBs."),
+  F("reMask",12,"or","RE mask."),
+  F("numSymbol",4,"or","PRACH repetitions / symbols."),
+  F("ef",1,"or","Extension flag."),
+  F("beamId",15,"or","Beam."),
+  F("frequencyOffset",24,"or","Signed offset of the PRACH centre from the carrier centre, in units of half the PRACH SCS. Drives the PRACH mixer NCO in the DFE."),
+  F("reserved",8,"rs","0.")]},
+ d5:{label:"eCPRI type 5 delay",rows:[
+  F("Measurement ID",8,"ec","Matches request and response."),
+  F("Action type",8,"ec","0 request, 1 request with follow-up, 2 response, 3 remote request, 4 remote request with follow-up, 5 follow-up."),
+  F("Timestamp seconds",48,"ec","PTP-format seconds at the timestamp point (t1 or t2)."),
+  F("Timestamp ns",32,"ec","Nanoseconds field."),
+  F("Compensation value",64,"ec","Internal delay between timestamp point and the reference point, in ns × 2^16. Lets you measure T12/T34 at the antenna-side reference rather than at the MAC.")]}
+};
+const tabOrder=['eth','ecpri','uplane','c1','c3','d5'];
+const tabs=$('#bitTabs');
+tabOrder.forEach(k=>{const b=document.createElement('button');b.type='button';b.role='tab';b.textContent=specs[k].label;b.dataset.k=k;b.onclick=()=>showBits(k);tabs.appendChild(b);});
+function showBits(k){
+  [...tabs.children].forEach(b=>b.setAttribute('aria-selected',b.dataset.k===k));
+  const g=$('#bitGrid');g.innerHTML='';
+  const hd=document.createElement('div');hd.className='hd';hd.textContent='byte';g.appendChild(hd);
+  for(let i=0;i<32;i++){const h=document.createElement('div');h.className='hd';h.textContent=i%8;g.appendChild(h);}
+  let col=0,row=0;
+  const newRow=()=>{const o=document.createElement('div');o.className='off';o.textContent='+'+(row*4);g.appendChild(o);};
+  newRow();
+  specs[k].rows.forEach(f=>{let rem=f.b,first=true;
+    while(rem>0){ if(col===32){col=0;row++;newRow();}
+      const take=Math.min(rem,32-col);const c=document.createElement('div');
+      c.className='f c-'+f.c;c.style.gridColumn=`span ${take}`;c.tabIndex=0;
+      c.innerHTML=first||take>=8?`<b>${first?f.n:'… '+f.n}</b>${take>=4?`<em>${f.v?f.v:f.b+'b'}</em>`:''}`:'';
+      c.title=f.n;
+      const show=()=>{$('#bitDesc').innerHTML=`<b>${f.n}</b> · ${f.b} bits. ${f.d}`;};
+      c.onmouseenter=show;c.onfocus=show;c.onclick=show;
+      g.appendChild(c);col+=take;rem-=take;first=false;}
+  });
+  while(col<32&&col>0){const c=document.createElement('div');c.style.gridColumn=`span ${32-col}`;g.appendChild(c);col=32;}
+  $('#bitDesc').textContent='Hover or tap a field for its meaning.';
+  document.querySelectorAll('#heroRibbon button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.k===k));
+}
+
+/* hero ribbon */
+const segs=[["Preamble + SFD",8,"eth","eth"],["Dest MAC",6,"eth","eth"],["Src MAC",6,"eth","eth"],["VLAN",4,"eth","eth"],["EtherType",2,"eth","eth"],
+ ["eCPRI common",4,"ec","ecpri"],["eAxC + seq",4,"ec","ecpri"],["O-RAN common",4,"or","uplane"],["Section hdr",4,"or","uplane"],["53 PRBs × 28 B",1484,"pl","uplane"],["FCS",4,"eth","eth"],["IFG",12,"eth","eth"]];
+const rib=$('#heroRibbon');
+const colors={eth:['--eth-t','--eth'],ec:['--ec-t','--ec'],or:['--or-t','--or'],pl:['--pl-t','--pl']};
+segs.forEach(s=>{const b=document.createElement('button');b.type='button';b.dataset.k=s[3];
+  const w=s[1]>100?Math.log2(s[1])*38:Math.max(s[1]*9,44);
+  b.style.flex=`${w} 1 0`;b.style.background=`var(${colors[s[2]][0]})`;b.style.borderTop=`4px solid var(${colors[s[2]][1]})`;
+  b.innerHTML=`<span>${s[0]}</span><small>${s[1]} B</small>`;b.setAttribute('aria-pressed','false');
+  b.onclick=()=>{showBits(s[3]);document.getElementById('s-anatomy').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});};
+  rib.appendChild(b);});
+{const cap=rib.closest('.fig').querySelector('.cap');
+ const tot=segs.reduce((a,s)=>a+s[1],0);
+ cap.innerHTML=`One downlink U-plane frame carrying 53 PRBs of 9-bit BFP IQ in a 1500-byte MTU. Header widths are enlarged for legibility; on the wire the IQ payload is ${(1484/tot*100).toFixed(1)}% of the ${tot} bytes including preamble and gap. Tap a segment to open its bit layout in section 4. These colors mean the same layer in every diagram below.`;}
+showBits('uplane');
+
+/* eAxC */
+const eaxcNames=[['DU_Port_ID','O-DU ports'],['BandSector_ID','bands / sectors'],['CC_ID','carriers'],['RU_Port_ID','RU ports / streams']];
+let eaxcW=[2,4,4,6];
+const ectl=$('#eaxcCtl');
+eaxcNames.forEach((n,i)=>{const l=document.createElement('label');l.innerHTML=`${n[0]} bits <input type="number" min="0" max="16" value="${eaxcW[i]}">`;
+  l.querySelector('input').oninput=e=>{eaxcW[i]=Math.max(0,Math.min(16,+e.target.value||0));drawEaxc();};ectl.appendChild(l);});
+function drawEaxc(){const sum=eaxcW.reduce((a,b)=>a+b,0);const bar=$('#eaxcBar');bar.innerHTML='';
+  const cs=['--eth','--ec','--or','--pl'];
+  eaxcW.forEach((w,i)=>{if(!w)return;const d=document.createElement('div');d.style.flex=`${w} 0 0`;d.style.background=`var(${cs[i]})`;d.textContent=`${eaxcNames[i][0]} [${w}]`;bar.appendChild(d);});
+  const o=$('#eaxcOut');
+  o.innerHTML=eaxcNames.map((n,i)=>`<div><b>${2**eaxcW[i]}</b><span>${n[1]}</span></div>`).join('')+
+   `<div><b class="${sum===16?'ok':'bad'}">${sum} / 16</b><span>${sum===16?'valid split':'must total 16 bits'}</span></div>`;}
+drawEaxc();
+
+/* BFP */
+let bfpVals=[];
+function gauss(){let u=0,v=0;while(!u)u=Math.random();while(!v)v=Math.random();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
+function newBfp(){bfpVals=Array.from({length:24},gauss);drawBfp();}
+function drawBfp(){
+  const w=+$('#bfpW').value, L=+$('#bfpL').value;
+  const scale=32767/4*Math.pow(10,-L/20);
+  const x=bfpVals.map(v=>Math.max(-32768,Math.min(32767,Math.round(v*scale))));
+  const maxV=Math.max(...x.map(Math.abs));
+  const need=Math.ceil(Math.log2(maxV+1))+1;
+  const e=Math.max(0,need-w);
+  const lim=2**(w-1);
+  const m=x.map(v=>Math.max(-lim,Math.min(lim-1,Math.round(v/2**e))));
+  const y=m.map(v=>v*2**e);
+  let ps=0,pn=0;x.forEach((v,i)=>{ps+=v*v;pn+=(v-y[i])**2;});
+  const sqnr=pn>0?10*Math.log10(ps/pn):Infinity;
+  const svg=$('#bfpSvg');svg.innerHTML='';
+  const H=90,mid=110,bw=34;
+  el('line',{x1:20,y1:mid,x2:940,y2:mid,class:'ln'},svg);
+  x.forEach((v,i)=>{const X=24+i*38;const h=v/32768*H;
+    el('rect',{x:X,y:h>0?mid-h:mid,width:bw/2-1,height:Math.abs(h)||0.5,style:`fill:var(${i%2?'--ec':'--eth'})`},svg);
+    const hy=y[i]/32768*H;
+    el('rect',{x:X+bw/2,y:hy>0?mid-hy:mid,width:bw/2-1,height:Math.abs(hy)||0.5,style:'fill:var(--pl)'},svg);
+    if(Math.abs(v)===maxV)el('text',{x:X+bw/2,y:v>0?mid-h-6:mid-h+14,'text-anchor':'middle',class:'sm',style:'fill:var(--tim);font-weight:700'},svg,'max');
+    if(i%2===0)el('text',{x:X+bw-2,y:222,'text-anchor':'middle',class:'sm mut'},svg,'RE'+(i/2));
+  });
+  el('text',{x:20,y:14,class:'sm mut'},svg,'Left bar of each pair: original 16-bit I (slate) or Q (copper). Right bar: after BFP decompress (violet).');
+  const bytes=3*w+1;
+  $('#bfpOut').innerHTML=`<div><b>${e}</b><span>shared exponent</span></div><div><b>${Math.round(maxV)}</b><span>peak |I|,|Q| in PRB</span></div><div><b>${isFinite(sqnr)?sqnr.toFixed(1)+' dB':'lossless'}</b><span>SQNR for this PRB</span></div><div><b>${bytes} B</b><span>per PRB vs 48 B raw (${(48/bytes).toFixed(2)}×)</span></div>`;
+}
+$('#bfpW').oninput=drawBfp;$('#bfpL').oninput=drawBfp;$('#bfpNew').onclick=newBfp;newBfp();
+
+/* numerology diagram */
+function drawNum(){
+  const sf=$('#sfRow');sf.innerHTML='';
+  for(let i=0;i<10;i++){el('rect',{x:20+i*96,y:112,width:94,height:28,rx:3,class:i===3?'s-tim':'s-or'},sf);
+    el('text',{x:67+i*96,y:131,'text-anchor':'middle',class:'sm'},sf,String(i));}
+  el('text',{x:500,y:57,'text-anchor':'middle',class:'sm'},sf,'10 ms radio frame (frameId = SFN mod 256)');
+  const d=$('#numDetail');d.innerHTML='';
+  el('path',{d:'M308 140 L20 184 M402 140 L980 184',class:'ln dash'},d);
+  [0,1].forEach(s=>{el('rect',{x:20+s*481,y:186,width:478,height:28,rx:3,class:s===1?'s-tim':'s-or'},d);
+    el('text',{x:259+s*481,y:205,'text-anchor':'middle',class:'sm'},d,`slot ${s} (μ = 1, 500 µs)`);});
+  el('path',{d:'M501 214 L20 254 M980 214 L980 254',class:'ln dash'},d);
+  const lens=[1+ 16/144*0,1,1,1,1,1,1,1,1,1,1,1,1,1];
+  for(let k=0;k<14;k++){const w=960/14;el('rect',{x:20+k*w,y:256,width:w-2,height:30,rx:2,class:k===0?'s-ec':'s-pl'},d);
+    el('text',{x:20+k*w+w/2,y:276,'text-anchor':'middle',class:'sm'},d,String(k));}
+  el('text',{x:20,y:298,class:'sm mut'},d,'');
+}
+drawNum();
+
+/* bandwidth calc */
+const cars=[["20 MHz, 15 kHz",106,0,30.72],["50 MHz, 30 kHz",133,1,61.44],["40 MHz, 30 kHz",106,1,61.44],["60 MHz, 30 kHz",162,1,92.16],["80 MHz, 30 kHz",217,1,122.88],["100 MHz, 30 kHz",273,1,122.88],["100 MHz, 60 kHz",135,2,122.88],["400 MHz, 120 kHz (FR2)",264,3,491.52]];
+const cs=$('#bwCar');cars.forEach((c,i)=>{const o=document.createElement('option');o.value=i;o.textContent=`${c[0]} · ${c[1]} PRB`;if(i===5)o.selected=true;cs.appendChild(o);});
+function calcBw(){
+  const c=cars[+cs.value];const prb=c[1],mu=c[2],fs=c[3]*1e6;
+  const L=Math.max(1,+$('#bwL').value||1),A=Math.max(1,+$('#bwA').value||1);
+  const meth=$('#bwM').value;let w=Math.max(1,Math.min(16,+$('#bwW').value||9));
+  if(meth==='none')w=16;
+  const param=(meth==='bfp'||meth==='mu')?1:0;
+  const bpp=3*w+param;
+  const mtu=+$('#bwMtu').value;
+  const symps=14000*2**mu;
+  const hdrIn=8+4+4; const wire=8+14+4+4+12;
+  const perPkt=Math.max(1,Math.floor((mtu-hdrIn)/bpp));
+  const pkts=Math.ceil(prb/perPkt);
+  const bytesSym=prb*bpp+pkts*(hdrIn+wire);
+  const rate=bytesSym*8*symps*L;
+  const iqOnly=prb*bpp*8*symps*L;
+  const s8=fs*2*16*A;
+  const fmt=v=>v>=1e9?(v/1e9).toFixed(2)+' Gb/s':(v/1e6).toFixed(0)+' Mb/s';
+  const lanes=Math.ceil(rate/25e9*1.0);
+  $('#bwOut').innerHTML=`<div><b>${fmt(rate)}</b><span>Ethernet line rate, one direction</span></div>
+   <div><b>${fmt(iqOnly)}</b><span>IQ payload only</span></div>
+   <div><b>${bpp} B</b><span>per PRB</span></div>
+   <div><b>${pkts}</b><span>packets per symbol per eAxC (${perPkt} PRB max each)</span></div>
+   <div><b>${(symps*pkts*L/1e6).toFixed(2)} M</b><span>packets per second</span></div>
+   <div><b class="${lanes<=4?'ok':'bad'}">${lanes} × 25G</b><span>ports needed (O-RAN IF supports up to 4)</span></div>`;
+  const mx=Math.max(rate,s8);
+  $('#bwBars').innerHTML=`<div style="font-size:13px;color:var(--muted)">Split 7.2x, ${L} streams</div><div class="bar"><div style="width:${rate/mx*100}%;background:var(--pl)">${fmt(rate)}</div></div>
+   <div style="font-size:13px;color:var(--muted)">Split 8, ${A} antennas × ${c[3]} MS/s × 2 × 16 bit (before line coding)</div><div class="bar"><div style="width:${s8/mx*100}%;background:var(--eth)">${fmt(s8)}</div></div>`;
+}
+['#bwCar','#bwL','#bwA','#bwM','#bwW','#bwMtu'].forEach(s=>$(s).addEventListener('input',calcBw));calcBw();
+
+/* timing windows */
+function drawTiming(){
+  const km=+$('#tFib').value,pdv=Math.max(0,+$('#tPdv').value||0);
+  const t2min=+$('#t2min').value,t2max=+$('#t2max').value,t3min=+$('#t3min').value,t3max=+$('#t3max').value;
+  const t12min=km*5,t12max=km*5+pdv;
+  const t1min=t2min+t12max,t1max=t2max+t12min;
+  const ta4min=t3min+t12min,ta4max=t3max+t12max;
+  const feas=t1max>=t1min;
+  $('#tFibV').textContent=km;
+  const svg=$('#tSvg');svg.innerHTML='';
+  const maxT=Math.max(t1max,t1min,ta4max,400)*1.08;
+  const X0=480,sc=440/maxT;
+  const xDL=t=>X0-t*sc, xUL=t=>X0+t*sc;
+  el('line',{x1:X0,y1:22,x2:X0,y2:240,style:'stroke:var(--tim);stroke-width:2'},svg);
+  el('text',{x:X0,y:14,'text-anchor':'middle',class:'sm',style:'fill:var(--tim);font-weight:700'},svg,'air time of symbol (t = 0 at antenna)');
+  el('text',{x:20,y:36,class:'md',style:'font-weight:650'},svg,'Downlink, µs before air');
+  el('text',{x:940,y:36,'text-anchor':'end',class:'md',style:'font-weight:650'},svg,'Uplink, µs after air');
+  const band=(t1,t2,y,cls,label,dl)=>{const f=dl?xDL:xUL;const a=Math.min(f(t1),f(t2)),b=Math.max(f(t1),f(t2));
+    el('rect',{x:a,y:y+6,width:Math.max(2,b-a),height:18,rx:4,class:cls},svg);
+    el('text',{x:dl?b:a,y:y,'text-anchor':dl?'end':'start',class:'sm'},svg,label);};
+  const arrow=(x1,y1,x2,y2,label,dl)=>{el('path',{d:`M${x1} ${y1} L${x2} ${y2}`,class:'ln-t','marker-end':'url(#a4)'},svg);
+    el('text',{x:(x1+x2)/2+(dl?-8:8),y:(y1+y2)/2+4,'text-anchor':dl?'end':'start',class:'sm',style:'fill:var(--tim)'},svg,label);};
+  if(feas){band(t1min,t1max,60,'s-pl',`O-DU sends U-plane, T1a ${t1min.toFixed(0)}–${t1max.toFixed(0)}`,true);
+    const c=(t1min+t1max)/2;arrow(xDL(c),88,xDL(c-(t12min+t12max)/2),136,`transport T12 ${t12min.toFixed(0)}–${t12max.toFixed(0)}`,true);}
+  else {el('text',{x:20,y:72,class:'sm',style:'fill:var(--tim);font-weight:700'},svg,'No valid T1a: O-RU window is narrower than the transport variation');}
+  band(t2min,t2max,150,'s-hard',`O-RU accepts, T2a ${t2min}–${t2max}`,true);
+  band(0,t2min,196,'s-soft',`O-RU processing ≤ T2a_min`,true);
+  band(0,t3min,60,'s-soft','O-RU processing',false);
+  band(t3min,t3max,104,'s-hard',`O-RU sends, Ta3 ${t3min}–${t3max}`,false);
+  const cu=(t3min+t3max)/2;arrow(xUL(cu),132,xUL(cu+(t12min+t12max)/2),180,`T34 ${t12min.toFixed(0)}–${t12max.toFixed(0)}`,false);
+  band(ta4min,ta4max,196,'s-pl',`O-DU receives, Ta4 ${ta4min.toFixed(0)}–${ta4max.toFixed(0)}`,false);
+  for(let t=0;t<=maxT;t+=100){el('line',{x1:xDL(t),y1:248,x2:xDL(t),y2:256,class:'ln'},svg);el('text',{x:xDL(t),y:270,'text-anchor':'middle',class:'sm mut'},svg,String(t));
+    if(t>0){el('line',{x1:xUL(t),y1:248,x2:xUL(t),y2:256,class:'ln'},svg);el('text',{x:xUL(t),y:270,'text-anchor':'middle',class:'sm mut'},svg,String(t));}}
+  el('line',{x1:20,y1:252,x2:940,y2:252,class:'ln'},svg);
+  el('text',{x:20,y:294,class:'sm mut'},svg,`One symbol at μ = 1 ≈ 35.7 µs, so this DL window needs ≈ ${Math.ceil((t2max-t2min)/35.7)} symbols of buffering per eAxC`);
+  $('#tOut').innerHTML=`<div><b>${t12min.toFixed(0)}–${t12max.toFixed(0)} µs</b><span>T12 / T34 range</span></div>
+   <div><b class="${feas?'ok':'bad'}">${feas?t1min.toFixed(0)+'–'+t1max.toFixed(0)+' µs':'infeasible'}</b><span>O-DU T1a window</span></div>
+   <div><b>${ta4min.toFixed(0)}–${ta4max.toFixed(0)} µs</b><span>O-DU Ta4 window</span></div>
+   <div><b>${(t2max-t2min)-(t12max-t12min)} µs</b><span>DL slack (window − transport variation)</span></div>`;
+}
+['#tFib','#tPdv','#t2min','#t2max','#t3min','#t3max'].forEach(s=>$(s).addEventListener('input',drawTiming));drawTiming();
+
+/* LLS topologies */
+const lls=[
+ ["LLS-C1","Direct link: the O-DU is the PTP grandmaster-facing clock for the O-RU. Simplest; no switches.",[["PRTC / GNSS","s-tim"],["O-DU (T-BC)","s-plain"],["O-RU (T-TSC)","s-hard"]]],
+ ["LLS-C2","O-DU distributes time through a bridged fronthaul of PTP-aware switches (T-BC).",[["PRTC / GNSS","s-tim"],["O-DU","s-plain"],["switch T-BC","s-eth"],["O-RU","s-hard"]]],
+ ["LLS-C3","A grandmaster inside the fronthaul network serves O-DU and O-RU directly; the O-DU is not in the timing path.",[["T-GM in FH net","s-tim"],["switch T-BC","s-eth"],["O-RU","s-hard"]],"O-DU"],
+ ["LLS-C4","Local PRTC (e.g. GNSS) at the O-RU; no timing over the fronthaul.",[["GNSS at O-RU","s-tim"],["O-RU","s-hard"]]]
+];
+function drawLls(){const g=$('#llsGrid');g.innerHTML='';
+ lls.forEach(L=>{const f=document.createElement('div');f.className='fig';f.style.margin='0';
+  const svg=el('svg',{viewBox:'0 0 420 120',role:'img','aria-label':L[0]},null);
+  el('text',{x:0,y:16,class:'lg'},svg,L[0]);
+  const n=L[2].length,w=(400-(n-1)*22)/n;
+  L[2].forEach((b,i)=>{const x=i*(w+22);el('rect',{x:x,y:34,width:w,height:40,rx:5,class:b[1]},svg);
+    el('text',{x:x+w/2,y:59,'text-anchor':'middle',class:'sm'},svg,b[0]);
+    if(i<n-1)el('path',{d:`M${x+w} 54 H${x+w+20}`,class:'ln-t','marker-end':'url(#a4)'},svg);});
+  if(L[3]){el('rect',{x:w+22,y:86,width:w,height:28,rx:5,class:'s-plain'},svg);el('text',{x:w+22+w/2,y:105,'text-anchor':'middle',class:'sm'},svg,'O-DU');
+    el('path',{d:`M${w+22+w/2} 74 V86`,class:'ln-t'},svg);}
+  f.appendChild(svg);const p=document.createElement('p');p.className='cap';p.textContent=L[1];f.appendChild(p);g.appendChild(f);});}
+drawLls();
+
+/* TE budget */
+const te=[["PRTC + T-GM",100,'--tim'],["T-BC chain, cTE + dTE",300,'--eth'],["Link asymmetry",250,'--ec'],["Holdover / rearrangement",250,'--ps'],["O-RU / end application",150,'--hard'],["Margin",450,'--rs']];
+$('#teBar').innerHTML=te.map(t=>`<div style="flex:${t[1]} 0 0;background:var(${t[2]})" title="${t[0]}: ${t[1]} ns">${t[0]} ${t[1]}</div>`).join('');
+$('#teBar').insertAdjacentHTML('afterend','<p class="cap" style="margin-top:4px">Total 1500 ns (values in ns).</p>');
+
+/* latency */
+function latBar(id,items){const tot=items.reduce((a,b)=>a+b[1],0);
+ $(id).innerHTML=`<div class="bar" style="height:34px">${items.map(i=>`<div style="flex:${Math.max(i[1],2)} 0 0;background:var(${i[2]})" title="${i[0]}: ${i[1]} µs">${i[1]>=6?i[0]:''}</div>`).join('')}</div>`+
+ `<div class="legend">${items.map(i=>`<span><i style="background:var(${i[2]})"></i>${i[0]} ≈ ${i[1]} µs</span>`).join('')}<span><b style="color:var(--ink)">≈ ${tot} µs total</b></span></div>`;}
+latBar('#latDL',[["MAC/PCS/FEC",1,'--eth'],["parse + decompress",4,'--or'],["collect symbol",36,'--pl'],["iFFT 4096",36,'--hard'],["CP + window",3,'--soft-ip'],["filter + DUC",5,'--hard'],["CFR",3,'--hard'],["DPD",1,'--hard'],["RF-DAC path",1,'--rs'],["margin",20,'--tim']]);
+latBar('#latUL',[["RF-ADC + DDC + filter",6,'--hard'],["equaliser",1,'--hard'],["receive full symbol",36,'--pl'],["FFT 4096",36,'--hard'],["BF + compress",4,'--or'],["packetise + MAC",2,'--eth'],["margin",15,'--tim']]);
+
+function redrawAll(){drawBfp();drawTiming();}
+})();
+</script>
+</div>
